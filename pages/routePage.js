@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
+import Navbar from "../components/Navbar";
 
 export default function RoutePage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -91,6 +92,8 @@ export default function RoutePage() {
         in={slideOpen}
         style={{ zIndex: 10, marginLeft: "150px" }}
       >
+        <Navbar></Navbar>
+
         {stations.map((element, index) => {
           return (
             <Box
@@ -102,6 +105,7 @@ export default function RoutePage() {
               bg="white.500"
               rounded="md"
               shadow="md"
+              key={index}
             >
               <p> {element.title}</p>
               {element.details.line.length > 1 ? (
