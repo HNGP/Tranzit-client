@@ -32,6 +32,7 @@ const NavLink = ({ children }) => (
       bg: useColorModeValue("blue.200", "gray.700"),
     }}
     href={"#"}
+    zIndex={100}
   >
     {children}
   </Link>
@@ -43,9 +44,10 @@ export default function Simple() {
   return (
     <Box
       bg={useColorModeValue("gray.100", "gray.300")}
-      px={4}
-      width="85%"
+      px={40}
       borderRadius="12px"
+      zIndex={10}
+      mb={100}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <IconButton
@@ -54,17 +56,19 @@ export default function Simple() {
           aria-label={"Open Menu"}
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
+          zIndex={100}
         />
         <Box display="flex">
           <Image height="40px" width="40px" src={logoImg} alt="Logo" />
           <Text fontSize={26} px={1}>
-            Transit
+            Tranzit
           </Text>
         </Box>
         <HStack
           as={"nav"}
           spacing={6}
           ml={-150}
+          zIndex={100}
           display={{ base: "none", md: "flex" }}
         >
           {Links.map((link) => (

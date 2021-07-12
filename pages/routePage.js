@@ -86,14 +86,12 @@ export default function RoutePage() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
+      <Navbar />
       <Slide
         direction="top"
         in={slideOpen}
-        style={{ zIndex: 10, marginLeft: "150px" }}
+        style={{ zIndex: 10, marginLeft: "150px", marginTop: "80px" }}
       >
-        <Navbar></Navbar>
-
         {stations.map((element, index) => {
           return (
             <Box
