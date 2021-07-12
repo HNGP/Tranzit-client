@@ -55,13 +55,18 @@ export default function Simple() {
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <Box display="flex" mr={-100}>
+        <Box display="flex">
           <Image height="40px" width="40px" src={logoImg} alt="Logo" />
           <Text fontSize={26} px={1}>
             Transit
           </Text>
         </Box>
-        <HStack as={"nav"} spacing={6} display={{ base: "none", md: "flex" }}>
+        <HStack
+          as={"nav"}
+          spacing={6}
+          ml={-150}
+          display={{ base: "none", md: "flex" }}
+        >
           {Links.map((link) => (
             <NavLink key={link}>{link}</NavLink>
           ))}
