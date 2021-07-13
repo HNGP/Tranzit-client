@@ -31,6 +31,7 @@ const NavLink = ({ children }) => (
     //   textDecoration: "none",
     //   bg: useColorModeValue("blue.200", "gray.700"),
     // }}
+
     href={"#"}
     zIndex={100}
   >
@@ -44,9 +45,14 @@ export default function Simple() {
   return (
     <Box
       // bg={useColorModeValue("gray.100", "gray.300")}
+      style={{
+        backdropFilter: "blur(2rem)",
+        boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
+      }}
+      bgGradient="linear(to-br, rgba(255, 255, 255, 0.7),
+    				rgba(255, 255, 255, 0.3))"
       px={40}
-      borderRadius="12px"
-      zIndex={10}
+      zIndex={100}
       mb={100}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>

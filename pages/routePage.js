@@ -23,6 +23,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
 import Navbar from "../components/Navbar";
+import backgroundImage from "../public/background.png";
 
 export default function RoutePage() {
   const [slideOpen, setSlideOpen] = useState(true);
@@ -69,10 +70,11 @@ export default function RoutePage() {
   return (
     <div>
       <Navbar />
+
       <Slide
-        direction="top"
+        direction="bottom"
         in={slideOpen}
-        style={{ zIndex: 10, marginLeft: "100px", marginTop: "100px" }}
+        style={{ zIndex: 10, marginLeft: "100px", marginBottom: "100px" }}
       >
         <Grid
           templateRows="repeat(1, 1fr)"
