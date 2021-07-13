@@ -119,3 +119,8 @@
     flex-direction: column;
   }
 }
+
+/* .info-card {
+  backdrop-filter: blur(2rem);
+  background-color: blue;
+} */
