@@ -27,10 +27,10 @@ const NavLink = ({ children }) => (
     px={2}
     py={1}
     rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("blue.200", "gray.700"),
-    }}
+    // _hover={{
+    //   textDecoration: "none",
+    //   bg: useColorModeValue("blue.200", "gray.700"),
+    // }}
     href={"#"}
     zIndex={100}
   >
@@ -43,7 +43,7 @@ export default function Simple() {
 
   return (
     <Box
-      bg={useColorModeValue("gray.100", "gray.300")}
+      // bg={useColorModeValue("gray.100", "gray.300")}
       px={40}
       borderRadius="12px"
       zIndex={10}
