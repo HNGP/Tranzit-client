@@ -25,9 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
-import Navbar from "../components/Navbar";
 import backgroundImage from "../public/background.png";
-
 
 export default function RoutePage() {
   const [slideOpen, setSlideOpen] = useState(true);
@@ -104,7 +102,6 @@ export default function RoutePage() {
                 sendStateSrc={getSrc}
                 sendStateDest={getDest}
               />
-              <Fare nFare={"50"} cFare={"40"} />
               <Fare nFare={"50"} cFare={"40"} />
               <Fare nFare={"50"} cFare={"40"} />
             </VStack>
