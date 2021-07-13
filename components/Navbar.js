@@ -57,17 +57,18 @@ export default function Simple() {
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
           zIndex={100}
+          ml={-135}
         />
-        <Box display="flex">
-          <Image height="40px" width="40px" src={logoImg} alt="Logo" />
-          <Text fontSize={26} px={1}>
+        <Box display="flex" style={{ cursor: "pointer" }}>
+          <Image height="30px" width="30px" src={logoImg} alt="Logo" />
+          <Text fontSize={25} px={1}>
             Tranzit
           </Text>
         </Box>
         <HStack
           as={"nav"}
           spacing={6}
-          ml={-150}
+          ml={200}
           zIndex={100}
           display={{ base: "none", md: "flex" }}
         >
@@ -88,7 +89,7 @@ export default function Simple() {
       </Flex>
 
       {isOpen ? (
-        <Box pb={4} display={{ md: "none" }}>
+        <Box pb={2} display={{ md: "none" }}>
           <Stack as={"nav"} spacing={4}>
             {Links.map((link) => (
               <NavLink key={link}>{link}</NavLink>
