@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
+import Navbar from "../components/Navbar";
 
 export default function RoutePage() {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -74,56 +75,55 @@ export default function RoutePage() {
 					<ModalBody>
 						<h1>bruh</h1>
 					</ModalBody>
-
-					<ModalFooter>
-						<Button
-							colorScheme="blue"
-							mr={3}
-							onClick={() => setModalOpen(false)}
-						>
-							Close
-						</Button>
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
-
-			<Slide
-				direction="top"
-				in={slideOpen}
-				style={{ zIndex: 10, marginLeft: "150px" }}
-			>
-				<Fare />
-				{stations.map((element, index) => {
-					return (
-						<Box
-							p="10px"
-							color={element.details.line}
-							mt="4"
-							fontSize="40px"
-							width="80%"
-							bg="white.500"
-							rounded="md"
-							shadow="md"
-						>
-							<p> {element.title}</p>
-							{element.details.line.length > 1 ? (
-								<div style={{ fontSize: "20px" }}>
-									<span>Interchange</span>
-									<Badge colorScheme={element.details.line[0]}>
-										{element.details.line[0]}
-									</Badge>
-									<ArrowForwardIcon />
-									<Badge colorScheme={element.details.line[1]}>
-										{element.details.line[1]}
-									</Badge>
-								</div>
-							) : (
-								<></>
-							)}
-						</Box>
-					);
-				})}
-			</Slide>
-		</div>
-	);
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Navbar />
+      <Slide
+        direction="top"
+        in={slideOpen}
+        style={{ zIndex: 10, marginLeft: "150px", marginTop: "80px" }}
+      >
+        {stations.map((element, index) => {
+          return (
+            <Box
+              p="10px"
+              color={element.details.line}
+              mt="4"
+              fontSize="40px"
+              width="80%"
+              bg="white.500"
+              rounded="md"
+              shadow="md"
+              key={index}
+            >
+              <p> {element.title}</p>
+              {element.details.line.length > 1 ? (
+                <div style={{ fontSize: "20px" }}>
+                  <span>Interchange</span>
+                  <Badge colorScheme={element.details.line[0]}>
+                    {element.details.line[0]}
+                  </Badge>
+                  <ArrowForwardIcon />
+                  <Badge colorScheme={element.details.line[1]}>
+                    {element.details.line[1]}
+                  </Badge>
+                </div>
+              ) : (
+                <></>
+              )}
+            </Box>
+          );
+        })}
+      </Slide>
+    </div>
+  );
 }
