@@ -3,6 +3,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
 import Fare from "../components/FareCard";
+import Navbar from "../components/Navbar";
+import StationsSelect from "../components/StationsSelect";
+import { Stations } from "../components/routeSample";
 import { useState, useEffect } from "react";
 import {
   Button,
@@ -24,6 +27,7 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
 import Navbar from "../components/Navbar";
 import backgroundImage from "../public/background.png";
+
 
 export default function RoutePage() {
   const [slideOpen, setSlideOpen] = useState(true);
@@ -63,6 +67,18 @@ export default function RoutePage() {
     },
   ]);
 
+  const [src, setSrc] = useState("");
+  const [dest, setDest] = useState("");
+
+  const getSrc = (src) => {
+    setSrc(src);
+    console.log(src);
+  };
+  const getDest = (dest) => {
+    setDest(dest);
+    console.log(dest);
+  };
+
   const onClose = () => {
     setModalOpen(false);
   };
@@ -83,13 +99,20 @@ export default function RoutePage() {
         >
           <GridItem colSpan={1} align="stretch">
             <VStack spacing={3}>
+              <StationsSelect
+                stationsList={Stations}
+                sendStateSrc={getSrc}
+                sendStateDest={getDest}
+              />
               <Fare nFare={"50"} cFare={"40"} />
               <Fare nFare={"50"} cFare={"40"} />
               <Fare nFare={"50"} cFare={"40"} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3}>
-            <Box w="100%"></Box>
+            <Box w="100%">
+              {src} {dest}
+            </Box>
           </GridItem>
         </Grid>
       </Slide>

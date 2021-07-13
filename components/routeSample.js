@@ -1,6 +1,6 @@
-{
-  "distance": 30.965262380730792,
-  "path": [
+export const Stations = {
+  distance: 30.965262380730792,
+  path: [
     "HUDA City Centre",
     "IFFCO Chowk",
     "MG Road",
@@ -14,9 +14,9 @@
     "Saket",
     "Hauz Khas",
     "Kalkaji Mandir",
-    "Botanical Garden"
+    "Botanical Garden",
   ],
-  "lines": [
+  lines: [
     ["Yellow Line"],
     ["Yellow Line"],
     ["Yellow Line"],
@@ -30,6 +30,6 @@
     ["Yellow Line"],
     ["Yellow Line", "Magenta Line"],
     ["Violet Line", "Magenta Line"],
-    ["Blue Line", "Magenta Line"]
-  ]
-}
+    ["Blue Line", "Magenta Line"],
+  ],
+};
