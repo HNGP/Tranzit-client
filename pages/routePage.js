@@ -2,79 +2,79 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
+import Fare from "../components/Fare";
 import { useState, useEffect } from "react";
 import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Slide,
-  Box,
-  VStack,
-  Badge,
+	Button,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+	Slide,
+	Box,
+	VStack,
+	Badge,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
 import Navbar from "../components/Navbar";
 
 export default function RoutePage() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [slideOpen, setSlideOpen] = useState(true);
-  const [stations, setStations] = useState([
-    {
-      id: 1,
-      title: "Adarsh Nagar",
-      connected: [2],
-      details: {
-        line: ["yellow"],
-        layout: "Elevated",
-        longitude: 77.169385,
-        latitude: 28.718104,
-      },
-    },
-    {
-      id: 2,
-      title: "AIIMS",
-      connected: [1],
-      details: {
-        line: ["yellow"],
-        layout: "Underground",
-        longitude: 77.20771,
-        latitude: 28.56892,
-      },
-    },
-    {
-      id: 3,
-      title: "Rajiv Chowk",
-      connected: [1],
-      details: {
-        line: ["yellow", "blue"],
-        layout: "Underground",
-        longitude: 77.21826,
-        latitude: 28.63282,
-      },
-    },
-  ]);
+	const [modalOpen, setModalOpen] = useState(false);
+	const [slideOpen, setSlideOpen] = useState(true);
+	const [stations, setStations] = useState([
+		{
+			id: 1,
+			title: "Adarsh Nagar",
+			connected: [2],
+			details: {
+				line: ["yellow"],
+				layout: "Elevated",
+				longitude: 77.169385,
+				latitude: 28.718104,
+			},
+		},
+		{
+			id: 2,
+			title: "AIIMS",
+			connected: [1],
+			details: {
+				line: ["yellow"],
+				layout: "Underground",
+				longitude: 77.20771,
+				latitude: 28.56892,
+			},
+		},
+		{
+			id: 3,
+			title: "Rajiv Chowk",
+			connected: [1],
+			details: {
+				line: ["yellow", "blue"],
+				layout: "Underground",
+				longitude: 77.21826,
+				latitude: 28.63282,
+			},
+		},
+	]);
 
-  const onClose = () => {
-    setModalOpen(false);
-  };
+	const onClose = () => {
+		setModalOpen(false);
+	};
 
-  return (
-    <div>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <h1>bruh</h1>
-          </ModalBody>
-
+	return (
+		<div>
+			<Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Modal Title</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<h1>bruh</h1>
+					</ModalBody>
           <ModalFooter>
             <Button
               colorScheme="blue"
