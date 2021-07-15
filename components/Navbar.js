@@ -63,7 +63,6 @@ export default function Simple() {
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
           zIndex={100}
-          ml={-135}
         />
         <Box display="flex" style={{ cursor: "pointer" }}>
           <Image height="30px" width="30px" src={logoImg} alt="Logo" />

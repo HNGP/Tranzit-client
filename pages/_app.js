@@ -8,10 +8,10 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider>
       <div className="bgWrap">
         <Box
-          w="100%"
-          h="100%"
+          w="2400px"
+          h="3000px"
           // bgGradient={"linear(to-bl, red.400, yellow.200)"}
-          bgGradient={"radial(gray.500, white)"}
+          bgGradient={"radial(gray.900, white)"}
           /* Rectangle 1 */
         />
       </div>
