@@ -6,10 +6,10 @@ const Fare = (props) => {
   return (
     <Box
       maxW="sm"
-      //   borderWidth="1px"
+      borderWidth="1px"
       w="22.5%"
-      minW="200px"
-      borderRadius="lg"
+      minW="250px"
+      borderRadius="15px"
       overflow="hidden"
       style={{
         backdropFilter: "blur(10rem)",
@@ -25,7 +25,7 @@ const Fare = (props) => {
           ₹{props.nFare}
         </Text>
         <Text m="3" mb="0" pt="2">
-          Consessional Fare
+          Concessional Fare
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
           ₹{props.cFare}

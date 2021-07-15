@@ -10,8 +10,9 @@ function MyApp({ Component, pageProps }) {
         <Box
           w="100%"
           h="100%"
-          // bgGradient={"linear(to-b, dark.100, purple.300)"}
-          bgGradient={"linear(to-bl, orange.100, purple.800)"}
+          // bgGradient={"linear(to-bl, red.400, yellow.200)"}
+          bgGradient={"radial(gray.500, white)"}
+          /* Rectangle 1 */
         />
       </div>
       <Component {...pageProps} />
