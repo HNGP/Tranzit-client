@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import React from "react";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
-import StationsSelect from "../components/StationsSelect";
+import StationsSelect from "../components/StationsSelectCard";
 import { Stations } from "../components/routeSample";
 import { useState, useEffect } from "react";
 import {
@@ -22,10 +22,13 @@ import {
   Badge,
   Grid,
   GridItem,
+  Container,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
 import backgroundImage from "../public/background.png";
+import RouteCard from "../components/RouteCard";
 
 export default function RoutePage() {
   const [slideOpen, setSlideOpen] = useState(true);
@@ -84,35 +87,20 @@ export default function RoutePage() {
   return (
     <div>
       <Navbar />
-
-      <Slide
-        direction="bottom"
-        in={slideOpen}
-        style={{ zIndex: 10, marginLeft: "100px", marginBottom: "100px" }}
-      >
-        <Grid
-          templateRows="repeat(1, 1fr)"
-          templateColumns="repeat(2, 1fr)"
-          gap={4}
-        >
-          <GridItem colSpan={1} align="stretch">
-            <VStack spacing={3}>
-              <StationsSelect
-                stationsList={Stations}
-                sendStateSrc={getSrc}
-                sendStateDest={getDest}
-              />
-              <Fare nFare={"50"} cFare={"40"} />
-              <Fare nFare={"50"} cFare={"40"} />
-            </VStack>
-          </GridItem>
-          <GridItem colSpan={3}>
-            <Box w="100%">
-              {src} {dest}
-            </Box>
-          </GridItem>
-        </Grid>
-      </Slide>
+      <Container className="layout" pl={150} ml={0}>
+        <SimpleGrid columns={2} spacing={20}>
+          <VStack width="100%" spacing={5}>
+            <StationsSelect
+              stationsList={Stations}
+              sendStateSrc={getSrc}
+              sendStateDest={getDest}
+            />
+            <Fare nFare={"50"} cFare={"40"} />
+            <Fare nFare={"50"} cFare={"40"} />
+          </VStack>
+          <RouteCard></RouteCard>
+        </SimpleGrid>
+      </Container>
     </div>
   );
 }

@@ -32,16 +32,22 @@ const StationsSelect = (props) => {
       maxW="sm"
       borderWidth="1px"
       w="22.5%"
-      minW="200px"
-      borderRadius="lg"
+      minW="250px"
+      borderRadius="15px"
       overflow="hidden"
-      //   bgGradient="linear(to-r, #FFFFFF, #DFDFE0)"
+      style={{
+        backdropFilter: "blur(10rem)",
+        boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
+      }}
+      bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))"
     >
       <form>
         <Box m="3">
           <Select
             variant="filled"
             placeholder="From"
+            borderRadius="10px"
+            height="34px"
             name="src"
             onChange={changeSrc}
           >
@@ -53,14 +59,25 @@ const StationsSelect = (props) => {
             variant="filled"
             placeholder="To"
             name="dest"
+            height="34px"
+            borderRadius="10px"
             onChange={changeDest}
           >
             {stations}
           </Select>
         </Box>
         <Box m="3">
-          <Button colorScheme="blue" size="md" onClick={sendData}>
-            Submit
+          <Button
+            // boxShadow="1px 1px 30px rgba(122, 122, 122, 0.212)"
+            bgColor="gray.500"
+            color="white"
+            width="100%"
+            fontSize="20px"
+            fontWeight="400"
+            size="md"
+            onClick={sendData}
+          >
+            Calculate Route
           </Button>
           {/* <Button isLoading loadingText="Calculating" colorScheme="blue">
             Submit
