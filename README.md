@@ -1,4 +1,4 @@
-## tranzit-client
+## Tranzit-client
 
 Frontend repository for Tranzit - A Metro Pathfinder app, built on Next.js
 
