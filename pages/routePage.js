@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
 import StationsSelect from "../components/StationsSelectCard";
@@ -32,6 +34,10 @@ import { sortedLastIndex, truncate } from "lodash";
 import backgroundImage from "../public/background.png";
 import RouteCard from "../components/RouteCard";
 import NearestStationCard from "../components/NearestStationCard";
+
+const client = new ApolloClient({
+  uri: "http://localhost:8000/graphql",
+});
 
 export default function RoutePage() {
   const location = useGeolocation();
@@ -75,24 +81,7 @@ export default function RoutePage() {
   const [src, setSrc] = useState("");
   const [dest, setDest] = useState("");
 
-  const [nearestStation, setNearestStation] = useState("Noida City Centre");
-
-  const getNearestStation = () => {
-    if (location.coordinates.lat && location.coordinates.lng) {
-      axios
-        .get(
-          `http://localhost:5000/geo?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}`
-        )
-        .then(
-          (response) => {
-            setNearestStation(response.data.nearestStation);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    }
-  };
+  const [nearestStation, setNearestStation] = useState("-");
 
   const getSrc = (src) => {
     setSrc(src);
@@ -107,27 +96,29 @@ export default function RoutePage() {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    getNearestStation();
-  });
-
   return (
     <div>
       <Navbar />
-      <Container className="layout" maxW="container.xl" centerContent ml={0}>
-        <SimpleGrid columns={2} spacing={1}>
-          <VStack width="100%" spacing={5}>
-            <StationsSelect
-              stationsList={Stations}
-              sendStateSrc={getSrc}
-              sendStateDest={getDest}
-            />
-            <NearestStationCard nearestStation={nearestStation} />
-            <Fare nFare={"50"} cFare={"40"} />
-          </VStack>
-          <RouteCard></RouteCard>
-        </SimpleGrid>
-      </Container>
+      <ApolloProvider client={client}>
+        <Container className="layout" maxW="container.xl" centerContent ml={0}>
+          <SimpleGrid columns={2} spacing={1}>
+            <VStack width="100%" spacing={5}>
+              <StationsSelect
+                stationsList={Stations}
+                sendStateSrc={getSrc}
+                sendStateDest={getDest}
+              />
+              <NearestStationCard
+                latitude={location.coordinates.lat}
+                longitude={location.coordinates.lng}
+              />
+              {/* <NearestStationCard nearestStation={nearestStation} /> */}
+              <Fare nFare={"50"} cFare={"40"} />
+            </VStack>
+            <RouteCard></RouteCard>
+          </SimpleGrid>
+        </Container>
+      </ApolloProvider>
     </div>
   );
 }

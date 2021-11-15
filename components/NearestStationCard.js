@@ -1,11 +1,24 @@
 import React from "react";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 import { useState, useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import LocationIcon from "../public/location-pin.png";
+import { parse } from "graphql";
 
 const NearestStationCard = (props) => {
+  let { latitude, longitude } = props;
+  latitude = parseFloat(latitude);
+  longitude = parseFloat(longitude);
+  const NEAREST_STATION_QUERY = gql`
+    query nearestStationQuery($latitude: Float, $longitude: Float) {
+      nearestStation(latitude: $latitude, longitude: $longitude) {
+        nearestStation
+      }
+    }
+  `;
   return (
     <Box
       maxW="sm"
@@ -27,9 +40,28 @@ const NearestStationCard = (props) => {
         <Text m="3" mt="0" mb="0" pt="2">
           Nearest Station
         </Text>
-        <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
-          {props.nearestStation}
-        </Text>
+        <Query
+          query={NEAREST_STATION_QUERY}
+          variables={{ latitude, longitude }}
+        >
+          {({ loading, error, data }) => {
+            if (loading)
+              return (
+                <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
+                  Loading....
+                </Text>
+              );
+            if (error) {
+              console.log(error);
+            }
+
+            return (
+              <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
+                {data.nearestStation.nearestStation}
+              </Text>
+            );
+          }}
+        </Query>
       </Box>
     </Box>
   );

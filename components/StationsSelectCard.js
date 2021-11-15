@@ -6,7 +6,10 @@ const StationsSelect = (props) => {
   const stations = [];
   for (var i = 0; i < props.stationsList.path.length; i++) {
     stations.push(
-      <option value={props.stationsList.path[i]}>
+      <option
+        key={props.stationsList.path[i]}
+        value={props.stationsList.path[i]}
+      >
         {props.stationsList.path[i]}
       </option>
     );
