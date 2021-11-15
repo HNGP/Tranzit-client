@@ -36,7 +36,7 @@ import RouteCard from "../components/RouteCard";
 import NearestStationCard from "../components/NearestStationCard";
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
+  uri: "http://localhost:8000/graphql",
 });
 
 export default function RoutePage() {
