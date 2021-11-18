@@ -1,0 +1,17 @@
+.routeContainer {
+  margin: 5.5rem 4rem;
+}
+
+.stationContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.stationContainer > p {
+  margin: 0;
+}
+
+.icon {
+  margin-right: 2rem;
+}

@@ -115,7 +115,7 @@ export default function RoutePage() {
               {/* <NearestStationCard nearestStation={nearestStation} /> */}
               <Fare nFare={"50"} cFare={"40"} />
             </VStack>
-            <RouteCard></RouteCard>
+            <RouteCard />
           </SimpleGrid>
         </Container>
       </ApolloProvider>
