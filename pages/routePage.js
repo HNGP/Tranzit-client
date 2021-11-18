@@ -11,6 +11,8 @@ import { Stations } from "../components/routeSample";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import useGeolocation from "../hooks/useGeoLocation";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 import {
   Button,
   Modal,
@@ -112,7 +114,6 @@ export default function RoutePage() {
                 latitude={location.coordinates.lat}
                 longitude={location.coordinates.lng}
               />
-              {/* <NearestStationCard nearestStation={nearestStation} /> */}
               <Fare nFare={"50"} cFare={"40"} />
             </VStack>
             <RouteCard></RouteCard>

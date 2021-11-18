@@ -1,8 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { Box, Text, Select, Button } from "@chakra-ui/react";
+// import { Query } from "@apollo/react-components";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 const StationsSelect = (props) => {
+  const STATION_LIST_QUERY = gql`
+    query StationsQuery {
+      stations {
+        title
+      }
+    }
+  `;
+  // console.log(title);
   const stations = [];
   for (var i = 0; i < props.stationsList.path.length; i++) {
     stations.push(
@@ -42,7 +53,8 @@ const StationsSelect = (props) => {
         backdropFilter: "blur(10rem)",
         boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
       }}
-      bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))"
+      bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
+      0.1))"
     >
       <form>
         <Box m="3">
