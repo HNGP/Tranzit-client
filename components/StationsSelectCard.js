@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Text, Select, Button } from "@chakra-ui/react";
+import { Box, Select, Button } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -13,18 +13,6 @@ const StationsSelect = (props) => {
       }
     }
   `;
-
-  const stations = [];
-  for (var i = 0; i < props.stationsList.path.length; i++) {
-    stations.push(
-      <option
-        key={props.stationsList.path[i]}
-        value={props.stationsList.path[i]}
-      >
-        {props.stationsList.path[i]}
-      </option>
-    );
-  }
 
   const [source, setSource] = useState(null);
   const [destination, setDestination] = useState(null);
