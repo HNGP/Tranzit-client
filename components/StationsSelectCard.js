@@ -1,34 +1,48 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Text, Select, Button } from "@chakra-ui/react";
+import { Box, Select, Button } from "@chakra-ui/react";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 const StationsSelect = (props) => {
-  const stations = [];
-  for (var i = 0; i < props.stationsList.path.length; i++) {
-    stations.push(
-      <option
-        key={props.stationsList.path[i]}
-        value={props.stationsList.path[i]}
-      >
-        {props.stationsList.path[i]}
-      </option>
-    );
-  }
+  const STATION_LIST_QUERY = gql`
+    query StationsQuery {
+      stations {
+        id
+        title
+      }
+    }
+  `;
 
-  const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
+  const [source, setSource] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [stationList, setStationList] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const changeSrc = (event) => {
-    setSource(event.target.value);
+    setSource(parseInt(event.target.value, 10));
     event.preventDefault();
   };
   const changeDest = (event) => {
-    setDestination(event.target.value);
+    setDestination(parseInt(event.target.value, 10));
     event.preventDefault();
   };
   const sendData = () => {
     props.sendStateSrc(source);
     props.sendStateDest(destination);
+  };
+  const onCompleteHandler = (data) => {
+    const sortedStationList = data.stations.sort((st1, st2) =>
+      st1.title > st2.title ? 1 : -1
+    );
+    setStationList(
+      sortedStationList.map((station) => (
+        <option key={station.id} value={station.id}>
+          {station.title}
+        </option>
+      ))
+    );
+    setIsDisabled(!isDisabled);
   };
   return (
     <Box
@@ -42,8 +56,10 @@ const StationsSelect = (props) => {
         backdropFilter: "blur(10rem)",
         boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
       }}
-      bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))"
+      bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
+      0.1))"
     >
+      <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
         <Box m="3">
           <Select
@@ -52,9 +68,10 @@ const StationsSelect = (props) => {
             borderRadius="10px"
             height="34px"
             name="src"
+            isDisabled={isDisabled}
             onChange={changeSrc}
           >
-            {stations}
+            {stationList}
           </Select>
         </Box>
         <Box m="3">
@@ -64,14 +81,15 @@ const StationsSelect = (props) => {
             name="dest"
             height="34px"
             borderRadius="10px"
+            isDisabled={isDisabled}
             onChange={changeDest}
           >
-            {stations}
+            {stationList}
           </Select>
         </Box>
         <Box m="3">
           <Button
-            // boxShadow="1px 1px 30px rgba(122, 122, 122, 0.212)"
+            isDisabled={!source || !destination}
             bgColor="gray.500"
             color="white"
             width="100%"
@@ -82,9 +100,6 @@ const StationsSelect = (props) => {
           >
             Calculate Route
           </Button>
-          {/* <Button isLoading loadingText="Calculating" colorScheme="blue">
-            Submit
-          </Button> */}
         </Box>
       </form>
     </Box>
