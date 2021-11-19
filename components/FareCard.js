@@ -25,10 +25,10 @@ const Fare = (props) => {
           ₹{props.nFare}
         </Text>
         <Text m="3" mb="0" pt="2">
-          Concessional Fare
+          Time
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
-          ₹{props.cFare}
+          {parseInt(props.time, 10)}min
         </Text>
       </Box>
     </Box>

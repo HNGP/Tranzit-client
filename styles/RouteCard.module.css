@@ -1,5 +1,9 @@
 .routeContainer {
-  margin: 5.5rem 4rem;
+  margin: 2rem 4rem;
+}
+
+.routeContainer > h1 {
+  margin-bottom: 1rem;
 }
 
 .stationContainer {

@@ -1,10 +1,10 @@
 import React from "react";
 import { MdCircle } from "react-icons/md";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Heading } from "@chakra-ui/react";
 import { STATION_LIST, LINE_TO_COLOR } from "../constants/staticData";
 import styles from "../styles/RouteCard.module.css";
 
-const RouteCard = (props) => {
+const RouteCard = ({ stationsList }) => {
   return (
     <Box
       maxW="sm"
@@ -20,16 +20,17 @@ const RouteCard = (props) => {
       bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))"
     >
       <div className={styles.routeContainer}>
-        {STATION_LIST.map((st) => (
-          <div key={st.station} className={styles.stationContainer}>
+        {stationsList.length > 0 && <Heading as="h1">Shortest Route:</Heading>}
+        {stationsList.map((station) => (
+          <div key={station.station} className={styles.stationContainer}>
             <div
               className={styles.icon}
-              style={{ color: LINE_TO_COLOR[st.lines[0]] }}
+              style={{ color: LINE_TO_COLOR[station.lines[0]] }}
             >
               <MdCircle size={20} />
             </div>
             <Text m="3" mb="0" fontSize="20px">
-              {st.station}
+              {station.station}
             </Text>
           </div>
         ))}

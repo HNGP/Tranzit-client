@@ -40,28 +40,34 @@ const NearestStationCard = (props) => {
         <Text m="3" mt="0" mb="0" pt="2">
           Nearest Station
         </Text>
-        <Query
-          query={NEAREST_STATION_QUERY}
-          variables={{ latitude, longitude }}
-        >
-          {({ loading, error, data }) => {
-            if (loading)
+        {latitude && longitude ? (
+          <Query
+            query={NEAREST_STATION_QUERY}
+            variables={{ latitude, longitude }}
+          >
+            {({ loading, error, data }) => {
+              if (loading)
+                return (
+                  <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
+                    Loading....
+                  </Text>
+                );
+              if (error) {
+                console.log(error);
+              }
+
               return (
                 <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
-                  Loading....
+                  {data.nearestStation.nearestStation}
                 </Text>
               );
-            if (error) {
-              console.log(error);
-            }
-
-            return (
-              <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
-                {data.nearestStation.nearestStation}
-              </Text>
-            );
-          }}
-        </Query>
+            }}
+          </Query>
+        ) : (
+          <Text ml="3" mb="0" fontSize="4xl" pb="5" lineHeight="45px">
+            Loading....
+          </Text>
+        )}
       </Box>
     </Box>
   );
