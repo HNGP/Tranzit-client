@@ -30,6 +30,8 @@ export const STATION_LIST = [
 ];
 
 export const LINE_TO_COLOR = {
-  "Yellow Line": "#f0c52a",
+  "Yellow Line": "#FFCC02",
   "Magenta Line": "#de69cb",
+  "Blue Line": "#006EE6",
+  "Red Line": "#FF0000",
 };

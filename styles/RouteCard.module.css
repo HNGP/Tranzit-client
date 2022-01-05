@@ -1,5 +1,5 @@
 .routeContainer {
-  margin: 2rem 4rem;
+  margin: 2rem 2rem;
 }
 
 .routeContainer > h1 {
@@ -16,6 +16,6 @@
   margin: 0;
 }
 
-.icon {
+/* .icon {
   margin-right: 2rem;
-}
+} */

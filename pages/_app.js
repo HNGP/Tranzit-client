@@ -1,4 +1,6 @@
+// import "../styles/antdesign.less";
 import "../styles/globals.css";
+import "antd/dist/antd.css";
 import Image from "next/image";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import ApolloClient from "apollo-boost";
@@ -18,7 +20,7 @@ function MyApp({ Component, pageProps }) {
             w="2400px"
             h="3000px"
             // bgGradient={"linear(to-bl, red.400, yellow.200)"}
-            bgGradient={"radial(gray.900, white)"}
+            bgGradient={["radial( orange.200, purple.300)"]}
             /* Rectangle 1 */
           />
         </div>

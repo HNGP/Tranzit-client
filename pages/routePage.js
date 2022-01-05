@@ -29,6 +29,7 @@ import {
   Container,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { Steps } from "antd";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { sortedLastIndex, truncate } from "lodash";
 import backgroundImage from "../public/background.png";
@@ -78,8 +79,8 @@ export default function RoutePage() {
     <div>
       <Navbar />
       <Container className="layout" maxW="container.xl" centerContent ml={0}>
-        <SimpleGrid columns={2} spacing={1}>
-          <VStack width="100%" spacing={5}>
+        <SimpleGrid columns={2} spacing={3}>
+          <VStack width="100%" spacing={3}>
             <StationsSelect runDijkstra={runDijkstra} />
             <NearestStationCard
               latitude={location.coordinates.lat}

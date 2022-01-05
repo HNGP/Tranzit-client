@@ -1,8 +1,11 @@
 import React from "react";
+import { Steps, Button } from "antd";
 import { MdCircle } from "react-icons/md";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import { STATION_LIST, LINE_TO_COLOR } from "../constants/staticData";
 import styles from "../styles/RouteCard.module.css";
+
+const { Step } = Steps;
 
 const RouteCard = ({ stationsList }) => {
   return (
@@ -20,20 +23,22 @@ const RouteCard = ({ stationsList }) => {
       bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))"
     >
       <div className={styles.routeContainer}>
-        {stationsList.length > 0 && <Heading as="h1">Shortest Route:</Heading>}
-        {stationsList.map((station) => (
-          <div key={station.station} className={styles.stationContainer}>
-            <div
-              className={styles.icon}
-              style={{ color: LINE_TO_COLOR[station.lines[0]] }}
-            >
-              <MdCircle size={20} />
-            </div>
-            <Text m="3" mb="0" fontSize="20px">
-              {station.station}
-            </Text>
-          </div>
-        ))}
+        <Steps direction="vertical" current={100}>
+          {stationsList.map((station) => (
+            <Step
+              title={station.station}
+              description={station.lines[0]}
+              icon={
+                <MdCircle
+                  style={{
+                    color: LINE_TO_COLOR[station.lines[0]],
+                    margin: "3px",
+                  }}
+                />
+              }
+            />
+          ))}
+        </Steps>
       </div>
     </Box>
   );
