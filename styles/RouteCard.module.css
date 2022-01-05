@@ -1,0 +1,21 @@
+.routeContainer {
+  margin: 2rem 2rem;
+}
+
+.routeContainer > h1 {
+  margin-bottom: 1rem;
+}
+
+.stationContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.stationContainer > p {
+  margin: 0;
+}
+
+/* .icon {
+  margin-right: 2rem;
+} */

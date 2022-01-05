@@ -28,8 +28,7 @@ const StationsSelect = (props) => {
     event.preventDefault();
   };
   const sendData = () => {
-    props.sendStateSrc(source);
-    props.sendStateDest(destination);
+    props.runDijkstra({ variables: { source, destination } });
   };
   const onCompleteHandler = (data) => {
     const sortedStationList = data.stations.sort((st1, st2) =>
