@@ -117,14 +117,13 @@
   margin: 100px 80px;
 }
 
+.landing-hero {
+  padding: 400px 100px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
   }
 }
-
-/* .info-card {
-  backdrop-filter: blur(2rem);
-  background-color: blue;
-} */

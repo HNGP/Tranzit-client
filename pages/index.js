@@ -1,107 +1,74 @@
+import { useState, useEffect } from "react";
 import { Form, Select, InputNumber, Switch, Slider, Button } from "antd";
 import { MdCircle } from "react-icons/md";
-import { Steps } from "antd";
-
-// Custom DatePicker that uses Day.js instead of Moment.js
-// import DatePicker from "../components/DatePicker";
-
+import Image from "next/image";
+import { SimpleGrid, Box } from "@chakra-ui/react";
+import Logo from "../public/tranzit-2x.png";
+import styles from "../styles/Home.module.css";
 import { SmileFilled } from "@ant-design/icons";
-
 import Link from "next/link";
+import StationsSelect from "../components/StationsSelectCard";
+import gql from "graphql-tag";
+import { useLazyQuery } from "react-apollo";
+import SVGComponent from "../components/MetroLines";
 
-const { Step } = Steps;
-
-const content = {
-  marginTop: "100px",
-};
+const ROUTE_QUERY = gql`
+  query routeQuery($source: Int, $destination: Int) {
+    route(source: $source, destination: $destination) {
+      distance
+      stationsList {
+        station
+        lines
+      }
+      fare
+      time
+    }
+  }
+`;
 
 export default function Home() {
-  return (
-    <div style={content}>
-      <div className="text-center mb-5">
-        <Link href="#">
-          <a className="logo mr-0">
-            <SmileFilled size={48} strokeWidth={1} />
-          </a>
-        </Link>
+  const [routeData, setRouteData] = useState({
+    fare: null,
+    stationsList: [],
+    time: null,
+  });
 
-        <p className="mb-0 mt-3 text-disabled">Welcome to the world !</p>
-      </div>
-      <div style={{ marginLeft: "100px" }}>
-        <Steps direction="vertical" current={100}>
-          <Step
-            title="HUDA City Centre"
-            description="Yellow Line"
-            icon={<MdCircle style={{ color: "#FFCC02" }} />}
-          />
-          <Step
-            title="IFFCO Chowk"
-            description="Blue Line"
-            icon={<MdCircle style={{ color: "#FFCC02" }} />}
-          />
-          <Step
-            title="Rajiv Chowk"
-            description="Blue Line"
-            icon={<MdCircle style={{ color: "#FFCC02" }} />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-          <Step
-            title="Dwarka Sector XXX"
-            description="Blue Line"
-            icon={<MdCircle />}
-          />
-        </Steps>
-        ,
-      </div>
+  const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY);
+
+  useEffect(() => {
+    if (data) {
+      const { fare, stationsList, time } = data.route;
+      setRouteData({
+        fare,
+        stationsList,
+        time,
+      });
+    }
+  }, [data]);
+
+  return (
+    <div>
+      <SimpleGrid columns={2} spacing={4}>
+        {/* <div style={{ padding: "200px 250px" }}> */}
+        <Box style={{ padding: "200px 250px" }}>
+          <Image src={Logo} height="200px" width="200px" style={{}} />
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "100",
+              margin: "-20px -10px",
+            }}
+          >
+            tranzit
+          </h1>
+          <div style={{ marginTop: "50px", marginLeft: "-20px" }}>
+            <StationsSelect runDijkstra={runDijkstra} />
+          </div>
+        </Box>
+        <Box style={{ padding: "200px 250px" }}>
+          <SVGComponent />
+        </Box>
+      </SimpleGrid>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import React from "react";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
@@ -79,8 +78,8 @@ export default function RoutePage() {
     <div>
       <Navbar />
       <Container className="layout" maxW="container.xl" centerContent ml={0}>
-        <SimpleGrid columns={2} spacing={3}>
-          <VStack width="100%" spacing={3}>
+        <SimpleGrid columns={2} spacing={3} ml={50}>
+          <VStack width="100%" spacing={3} ml={150}>
             <StationsSelect runDijkstra={runDijkstra} />
             <NearestStationCard
               latitude={location.coordinates.lat}
