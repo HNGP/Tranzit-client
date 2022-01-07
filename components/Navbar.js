@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Image from "next/image";
-import logoImg from "../public/logo.svg";
+import logoImg from "../public/tranzit-2x-shadow.png";
 
 const Links = ["Home", "Map", "About"];
 
@@ -52,7 +52,8 @@ export default function Simple() {
       }}
       bgGradient="linear(to-br, rgba(255, 255, 255, 0.7),
     				rgba(255, 255, 255, 0.3))"
-      px={40}
+      pl={80}
+      height={70}
       zIndex={100}
       mb={100}
     >
@@ -64,17 +65,24 @@ export default function Simple() {
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
           zIndex={100}
+          mt={20}
         />
         <Box display="flex" style={{ cursor: "pointer" }}>
-          <Image height="30px" width="30px" src={logoImg} alt="Logo" />
-          <Text fontSize={25} px={1}>
-            Tranzit
+          <Image
+            style={{ border: "2px" }}
+            height="50px"
+            width="50px"
+            src={logoImg}
+            alt="Logo"
+          />
+          <Text fontSize={35} px={2} fontWeight={300}>
+            tranzit
           </Text>
         </Box>
         <HStack
           as={"nav"}
           spacing={6}
-          ml={200}
+          ml={400}
           zIndex={100}
           display={{ base: "none", md: "flex" }}
         >

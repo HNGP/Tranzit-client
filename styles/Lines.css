@@ -1,0 +1,33 @@
+/* $gray: #222;
+$bg-color: $gray; */
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 60vw;
+  margin-left: -400px;
+  /* background-color: $bg-color; */
+}
+
+.map {
+  height: 90%;
+  width: 90%;
+}
+
+.line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 5s infinite alternate;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
