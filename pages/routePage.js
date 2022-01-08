@@ -38,13 +38,12 @@ import NearestStationCard from "../components/NearestStationCard";
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
     route(source: $source, destination: $destination) {
-      distance
+      time
       stationsList {
         station
         lines
       }
       fare
-      time
     }
   }
 `;
