@@ -8,11 +8,10 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import backgroundImage from "../public/background.png";
 
-const LOCAL_URL = "http://localhost:8000/graphql";
 const PROD_URL = "https://fast-journey-59048.herokuapp.com/graphql";
 
 const client = new ApolloClient({
-  uri: PROD_URL,
+  uri: process.env.NEXT_PUBLIC_API,
 });
 
 function MyApp({ Component, pageProps }) {

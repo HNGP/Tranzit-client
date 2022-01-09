@@ -34,4 +34,9 @@ export const LINE_TO_COLOR = {
   "Magenta Line": "#de69cb",
   "Blue Line": "#006EE6",
   "Red Line": "#FF0000",
+  "Pink Line": "#FC8EAC",
+  "Orange Line": "#FF8C00",
+  "Green Line": "#20B2AA",
+  "Violet Line": "#553592",
+  "Grey Line": "#838996",
 };
