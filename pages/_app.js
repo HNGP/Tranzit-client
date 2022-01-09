@@ -9,9 +9,6 @@ import { ApolloProvider } from "react-apollo";
 import backgroundImage from "../public/background.png";
 
 const PROD_URL = "https://fast-journey-59048.herokuapp.com/graphql";
-const LOCAL_URL = "http://localhost:8000/graphql";
-const dev = process.env.NODE_ENV !== "production";
-const SERVER = dev ? LOCAL_URL : PROD_URL;
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API,
