@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Box, Select, Button } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import Dropdown from "./common/Dropdown";
 
 const StationsSelect = (props) => {
   const STATION_LIST_QUERY = gql`
@@ -27,6 +28,13 @@ const StationsSelect = (props) => {
     setDestination(parseInt(event.target.value, 10));
     event.preventDefault();
   };
+  const swap = () => {
+    const temp = source;
+    setSource(destination);
+    setDestination(temp);
+    console.log(source);
+    console.log(destination);
+  };
   const sendData = () => {
     props.runDijkstra({ variables: { source, destination } });
   };
@@ -34,13 +42,8 @@ const StationsSelect = (props) => {
     const sortedStationList = data.stations.sort((st1, st2) =>
       st1.title > st2.title ? 1 : -1
     );
-    setStationList(
-      sortedStationList.map((station) => (
-        <option key={station.id} value={station.id}>
-          {station.title}
-        </option>
-      ))
-    );
+    console.log(sortedStationList);
+    setStationList(sortedStationList);
     setIsDisabled(!isDisabled);
   };
   return (
@@ -61,7 +64,7 @@ const StationsSelect = (props) => {
       <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
         <Box m="3">
-          <Select
+          {/* <Select
             variant="filled"
             placeholder="From"
             borderRadius="10px"
@@ -71,10 +74,17 @@ const StationsSelect = (props) => {
             onChange={changeSrc}
           >
             {stationList}
-          </Select>
+          </Select> */}
+          <Dropdown
+            isDisabled={isDisabled}
+            onChange={changeSrc}
+            selected={source}
+            list={stationList}
+          />
         </Box>
+        <Button onClick={swap}> Swap </Button>
         <Box m="3">
-          <Select
+          {/* <Select
             variant="filled"
             placeholder="To"
             name="dest"
@@ -84,7 +94,7 @@ const StationsSelect = (props) => {
             onChange={changeDest}
           >
             {stationList}
-          </Select>
+          </Select> */}
         </Box>
         <Box m="3">
           <Button
