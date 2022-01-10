@@ -11,8 +11,7 @@ import backgroundImage from "../public/background.png";
 const PROD_URL = "https://fast-journey-59048.herokuapp.com/graphql";
 
 const client = new ApolloClient({
-  // uri: process.env.NEXT_PUBLIC_API,
-  uri: PROD_URL,
+  uri: process.env.NEXT_PUBLIC_API,
 });
 
 function MyApp({ Component, pageProps }) {
