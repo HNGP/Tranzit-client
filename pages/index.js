@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Form, Select, InputNumber, Switch, Slider, Button } from "antd";
 import { MdCircle } from "react-icons/md";
 import Image from "next/image";
@@ -11,27 +11,23 @@ import StationsSelect from "../components/StationsSelectCard";
 import gql from "graphql-tag";
 import { useLazyQuery } from "react-apollo";
 import SVGComponent from "../components/MetroLines";
+import RouteContext from "../context/routeContext";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
     route(source: $source, destination: $destination) {
-      distance
+      time
       stationsList {
         station
         lines
       }
       fare
-      time
     }
   }
 `;
 
 export default function Home() {
-  const [routeData, setRouteData] = useState({
-    fare: null,
-    stationsList: [],
-    time: null,
-  });
+  const { setRouteData } = useContext(RouteContext);
 
   const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY);
 

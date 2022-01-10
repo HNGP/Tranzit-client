@@ -39,15 +39,11 @@ const StationsSelect = (props) => {
     event.preventDefault();
   };
   const sendData = () => {
-    if (props.sender === "homepage") {
-      Router.push({
-        pathname: "/routePage",
-        query: { src: source, des: destination },
-      });
-      props.runDijkstra({ variables: { source, destination } });
-    } else {
-      props.runDijkstra({ variables: { source, destination } });
-    }
+    Router.push({
+      pathname: "/routePage",
+      query: { src: source, des: destination },
+    });
+    props.runDijkstra({ variables: { source, destination } });
   };
 
   return (
