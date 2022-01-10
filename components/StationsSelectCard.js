@@ -42,8 +42,13 @@ const StationsSelect = (props) => {
     const sortedStationList = data.stations.sort((st1, st2) =>
       st1.title > st2.title ? 1 : -1
     );
-    console.log(sortedStationList);
-    setStationList(sortedStationList);
+    setStationList(
+      sortedStationList.map((station) => (
+        <option key={station.id} value={station.id}>
+          {station.title}
+        </option>
+      ))
+    );
     setIsDisabled(!isDisabled);
   };
   return (
@@ -64,17 +69,6 @@ const StationsSelect = (props) => {
       <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
         <Box m="3">
-          {/* <Select
-            variant="filled"
-            placeholder="From"
-            borderRadius="10px"
-            height="34px"
-            name="src"
-            isDisabled={isDisabled}
-            onChange={changeSrc}
-          >
-            {stationList}
-          </Select> */}
           <Dropdown
             isDisabled={isDisabled}
             onChange={changeSrc}
