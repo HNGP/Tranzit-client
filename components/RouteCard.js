@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Steps, Button } from "antd";
 import { MdCircle } from "react-icons/md";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import { STATION_LIST, LINE_TO_COLOR } from "../constants/staticData";
 import styles from "../styles/RouteCard.module.css";
+import RouteContext from "../context/routeContext";
 
 const { Step } = Steps;
 
 const RouteCard = ({ stationsList }) => {
+  const { routeData } = useContext(RouteContext);
   return (
     <Box
       maxW="sm"
@@ -24,7 +26,7 @@ const RouteCard = ({ stationsList }) => {
     >
       <div className={styles.routeContainer}>
         <Steps direction="vertical" current={100}>
-          {stationsList.map((station) => (
+          {routeData.stationsList.map((station) => (
             <Step
               title={station.station}
               description={station.lines[0]}

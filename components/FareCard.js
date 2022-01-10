@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
+import RouteContext from "../context/routeContext";
 
 const Fare = (props) => {
+  const { routeData } = useContext(RouteContext);
   return (
     <Box
       maxW="sm"
@@ -22,13 +24,13 @@ const Fare = (props) => {
           Normal Fare
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" p="0" lineHeight="45px">
-          ₹{props.nFare}
+          ₹{routeData.fare}
         </Text>
         <Text m="3" mb="0" pt="2">
           Time
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
-          {parseInt(props.time, 10)}min
+          {routeData.time}min
         </Text>
       </Box>
     </Box>

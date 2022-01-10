@@ -5,7 +5,7 @@ import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
 import StationsSelect from "../components/StationsSelectCard";
 import { Stations } from "../components/routeSample";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import useGeolocation from "../hooks/useGeoLocation";
 import gql from "graphql-tag";
@@ -34,6 +34,7 @@ import { sortedLastIndex, truncate } from "lodash";
 import backgroundImage from "../public/background.png";
 import RouteCard from "../components/RouteCard";
 import NearestStationCard from "../components/NearestStationCard";
+import RouteContext from "../context/routeContext";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -50,11 +51,7 @@ const ROUTE_QUERY = gql`
 
 export default function RoutePage() {
   const location = useGeolocation();
-  const [routeData, setRouteData] = useState({
-    fare: null,
-    stationsList: [],
-    time: null,
-  });
+  const { setRouteData } = useContext(RouteContext);
 
   const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY);
 
@@ -84,11 +81,9 @@ export default function RoutePage() {
               latitude={location.coordinates.lat}
               longitude={location.coordinates.lng}
             />
-            {routeData.fare && (
-              <Fare nFare={routeData.fare} time={routeData.time} />
-            )}
+            <Fare />
           </VStack>
-          <RouteCard stationsList={routeData.stationsList} />
+          <RouteCard />
         </SimpleGrid>
       </Container>
     </div>
