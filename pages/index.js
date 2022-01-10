@@ -51,7 +51,7 @@ export default function Home() {
       <SimpleGrid columns={2} spacing={4}>
         {/* <div style={{ padding: "200px 250px" }}> */}
         <Box style={{ padding: "200px 250px" }}>
-          <Image src={Logo} height="200px" width="200px" style={{}} />
+          <Image src={Logo} height="150px" width="150px" />
           <h1
             style={{
               fontSize: "100px",
@@ -62,10 +62,10 @@ export default function Home() {
             tranzit
           </h1>
           <div style={{ marginTop: "50px", marginLeft: "-20px" }}>
-            <StationsSelect runDijkstra={runDijkstra} />
+            <StationsSelect runDijkstra={runDijkstra} sender={"homepage"} />
           </div>
         </Box>
-        <Box style={{ padding: "200px 250px" }}>
+        <Box style={{ padding: "240px 300px" }}>
           <SVGComponent />
         </Box>
       </SimpleGrid>

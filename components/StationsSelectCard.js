@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Box, Select, Button } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import Router from "next/router";
 
 const StationsSelect = (props) => {
   const STATION_LIST_QUERY = gql`
@@ -28,7 +29,15 @@ const StationsSelect = (props) => {
     event.preventDefault();
   };
   const sendData = () => {
-    props.runDijkstra({ variables: { source, destination } });
+    if (props.sender === "homepage") {
+      Router.push({
+        pathname: "/routePage",
+        query: { src: source, des: destination },
+      });
+      props.runDijkstra({ variables: { source, destination } });
+    } else {
+      props.runDijkstra({ variables: { source, destination } });
+    }
   };
   const onCompleteHandler = (data) => {
     const sortedStationList = data.stations.sort((st1, st2) =>

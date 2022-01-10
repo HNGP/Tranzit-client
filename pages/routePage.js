@@ -34,6 +34,7 @@ import { sortedLastIndex, truncate } from "lodash";
 import backgroundImage from "../public/background.png";
 import RouteCard from "../components/RouteCard";
 import NearestStationCard from "../components/NearestStationCard";
+import { useRouter } from "next/router";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -61,6 +62,10 @@ export default function RoutePage() {
   const onClose = () => {
     setModalOpen(false);
   };
+
+  const router = useRouter();
+  let source1 = router.query.src;
+  let destination1 = router.query.des;
 
   useEffect(() => {
     if (data) {
