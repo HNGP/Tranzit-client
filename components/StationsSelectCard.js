@@ -14,18 +14,20 @@ const StationsSelect = (props) => {
   const { data } = useStationList();
 
   useEffect(() => {
-    const sortedStationList = data.stations.sort((st1, st2) =>
-      st1.title > st2.title ? 1 : -1
-    );
-    setStationList(
-      sortedStationList.map((station) => (
-        <option key={station.id} value={station.id}>
-          {station.title}
-        </option>
-      ))
-    );
-    setIsDisabled(!isDisabled);
-  }, [data.stations.length]);
+    if (data) {
+      const sortedStationList = data.stations.sort((st1, st2) =>
+        st1.title > st2.title ? 1 : -1
+      );
+      setStationList(
+        sortedStationList.map((station) => (
+          <option key={station.id} value={station.id}>
+            {station.title}
+          </option>
+        ))
+      );
+      setIsDisabled(!isDisabled);
+    }
+  }, [data]);
 
   const changeSrc = (event) => {
     setSource(parseInt(event.target.value, 10));
