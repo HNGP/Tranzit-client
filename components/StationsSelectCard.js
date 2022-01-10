@@ -1,23 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Select, Button } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import useStationList from "../hooks/useStationList";
 
 const StationsSelect = (props) => {
-  const STATION_LIST_QUERY = gql`
-    query StationsQuery {
-      stations {
-        id
-        title
-      }
-    }
-  `;
-
   const [source, setSource] = useState(null);
   const [destination, setDestination] = useState(null);
   const [stationList, setStationList] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const { data } = useStationList();
+
+  useEffect(() => {
+    const sortedStationList = data.stations.sort((st1, st2) =>
+      st1.title > st2.title ? 1 : -1
+    );
+    setStationList(
+      sortedStationList.map((station) => (
+        <option key={station.id} value={station.id}>
+          {station.title}
+        </option>
+      ))
+    );
+    setIsDisabled(!isDisabled);
+  }, [data.stations.length]);
 
   const changeSrc = (event) => {
     setSource(parseInt(event.target.value, 10));
@@ -30,19 +38,7 @@ const StationsSelect = (props) => {
   const sendData = () => {
     props.runDijkstra({ variables: { source, destination } });
   };
-  const onCompleteHandler = (data) => {
-    const sortedStationList = data.stations.sort((st1, st2) =>
-      st1.title > st2.title ? 1 : -1
-    );
-    setStationList(
-      sortedStationList.map((station) => (
-        <option key={station.id} value={station.id}>
-          {station.title}
-        </option>
-      ))
-    );
-    setIsDisabled(!isDisabled);
-  };
+
   return (
     <Box
       maxW="sm"
@@ -58,7 +54,6 @@ const StationsSelect = (props) => {
       bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
       0.1))"
     >
-      <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
         <Box m="3">
           <Select
