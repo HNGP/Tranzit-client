@@ -10,6 +10,7 @@ const StationsSelect = (props) => {
   const [source, setSource] = useState(null);
   const [destination, setDestination] = useState(null);
   const [stationList, setStationList] = useState([]);
+  const [isLoading, loadingActions] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const { data } = useStationList();
@@ -39,11 +40,15 @@ const StationsSelect = (props) => {
     event.preventDefault();
   };
   const sendData = () => {
+    loadingActions((loading) => !loading);
     Router.push({
       pathname: "/routePage",
       query: { src: source, des: destination },
-    });
-    props.runDijkstra({ variables: { source, destination } });
+    })
+      .then(props.runDijkstra({ variables: { source, destination } }))
+      .then(
+        props.sender !== "homepage" && loadingActions((loading) => !loading)
+      );
   };
 
   return (
@@ -90,6 +95,7 @@ const StationsSelect = (props) => {
         </Box>
         <Box m="3">
           <Button
+            isLoading={isLoading}
             isDisabled={!source || !destination}
             bgColor="gray.500"
             color="white"
