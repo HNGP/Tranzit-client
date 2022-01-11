@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Select, Button } from "@chakra-ui/react";
+import { Box, Select, Button, Flex } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import Dropdown from "./common/Dropdown";
+import { IconButton } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
+import { MdSwapVert } from "react-icons/md";
 
 const StationsSelect = (props) => {
   const STATION_LIST_QUERY = gql`
@@ -27,6 +31,13 @@ const StationsSelect = (props) => {
     setDestination(parseInt(event.target.value, 10));
     event.preventDefault();
   };
+  const swap = () => {
+    const temp = source;
+    setSource(destination);
+    setDestination(temp);
+    console.log(source);
+    console.log(destination);
+  };
   const sendData = () => {
     props.runDijkstra({ variables: { source, destination } });
   };
@@ -44,7 +55,8 @@ const StationsSelect = (props) => {
     setIsDisabled(!isDisabled);
   };
   return (
-    <Box
+    <Flex
+      direction="row"
       maxW="sm"
       borderWidth="1px"
       w="22.5%"
@@ -60,48 +72,55 @@ const StationsSelect = (props) => {
     >
       <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
-        <Box m="3">
-          <Select
-            variant="filled"
-            placeholder="From"
-            borderRadius="10px"
-            height="34px"
-            name="src"
-            isDisabled={isDisabled}
-            onChange={changeSrc}
-          >
-            {stationList}
-          </Select>
-        </Box>
-        <Box m="3">
-          <Select
-            variant="filled"
-            placeholder="To"
-            name="dest"
-            height="34px"
-            borderRadius="10px"
-            isDisabled={isDisabled}
-            onChange={changeDest}
-          >
-            {stationList}
-          </Select>
-        </Box>
-        <Box m="3">
-          <Button
-            isDisabled={!source || !destination}
-            bgColor="gray.500"
-            color="white"
-            width="100%"
-            fontSize="20px"
-            fontWeight="400"
-            size="md"
-            onClick={sendData}
-          >
-            Calculate Route
-          </Button>
-        </Box>
+        <Flex direction="column">
+          <Box m="3">
+            <Select
+              variant="filled"
+              placeholder="From"
+              name="src"
+              height="34px"
+              borderRadius="10px"
+              isDisabled={isDisabled}
+              onChange={changeSrc}
+              value={source}
+            >
+              {stationList}
+            </Select>
+          </Box>
+          <Box m="3">
+            <Select
+              variant="filled"
+              placeholder="To"
+              name="dest"
+              height="34px"
+              borderRadius="10px"
+              isDisabled={isDisabled}
+              onChange={changeDest}
+              value={destination}
+            >
+              {stationList}
+            </Select>
+          </Box>
+          <Box m="3">
+            <Button
+              isDisabled={!source || !destination}
+              bgColor="gray.500"
+              color="white"
+              width="100%"
+              fontSize="20px"
+              fontWeight="400"
+              size="md"
+              onClick={sendData}
+            >
+              Calculate Route
+            </Button>
+          </Box>
+        </Flex>
       </form>
-    </Box>
+      <Flex justify="end" marginTop="20%">
+        <MdSwapVert color="#000000" onClick={swap} fontSize="25px" />
+      </Flex>
+    </Flex>
   );
 };
 
