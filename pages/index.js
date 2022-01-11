@@ -10,6 +10,7 @@ import StationsSelect from "../components/StationsSelectCard";
 import RouteContext from "../context/routeContext";
 import Logo from "../public/tranzit-2x.png";
 import styles from "../styles/Home.module.css";
+import useGeolocation from "../hooks/useGeoLocation";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -25,6 +26,7 @@ const ROUTE_QUERY = gql`
 `;
 
 export default function Home() {
+  const location = useGeolocation();
   const { routeData, setRouteData } = useContext(RouteContext);
   const [station, setStation] = useState({
     source: null,
@@ -69,10 +71,12 @@ export default function Home() {
           <div className={styles.logoLine}>
             <h1 className={styles.logoText}>tranzit</h1>
           </div>
-          <div style={{ marginTop: "140px", marginLeft: "80px" }}>
+          <div style={{ marginTop: "180px", marginLeft: "10px" }}>
             <StationsSelect
               findShortestPath={findShortestPath}
               isLoading={routeData.loading}
+              latitude={location.coordinates.lat}
+              longitude={location.coordinates.lng}
             />
           </div>
         </Box>

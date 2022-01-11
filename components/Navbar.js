@@ -28,7 +28,7 @@ const NavLink = ({ children }) => (
     //   bg: useColorModeValue("blue.200", "gray.700"),
     // }}
 
-    href={"#"}
+    href={"/"}
     zIndex={100}
   >
     {children}
@@ -92,7 +92,9 @@ export default function Simple() {
               <MenuItem>Home</MenuItem>
               <MenuItem>Map</MenuItem>
               <MenuDivider />
-              <MenuItem>About</MenuItem>
+              <MenuItem>
+                <Link href="/aboutPage">About</Link>
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

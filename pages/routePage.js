@@ -73,6 +73,8 @@ export default function RoutePage() {
             <StationsSelect
               findShortestPath={findShortestPath}
               isLoading={routeData.loading}
+              latitude={location.coordinates.lat}
+              longitude={location.coordinates.lng}
             />
             <NearestStationCard
               latitude={location.coordinates.lat}
@@ -86,3 +88,6 @@ export default function RoutePage() {
     </div>
   );
 }
+
+
+  
