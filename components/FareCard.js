@@ -30,7 +30,7 @@ const Fare = (props) => {
           Time
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
-          {routeData.time}min
+          {parseInt(routeData.time, 10)}min
         </Text>
       </Box>
     </Box>
