@@ -16,7 +16,8 @@ const RouteCard = () => {
       maxW="sm"
       borderWidth="1px"
       //   w="22.5%"
-      minW="600px"
+      mb={20}
+      minW="500px"
       borderRadius="15px"
       overflow="hidden"
       style={{
