@@ -68,27 +68,29 @@ export default function RoutePage() {
       <Navbar />
       <div
         className="HeroLayout"
-        style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "900px" }}
+        style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1000px" }}
       >
         <Row>
-          <Col>
+          <Col style={{ marginRight: "20px" }}>
             <Row>
               <StationsSelect
                 findShortestPath={findShortestPath}
                 isLoading={routeData.loading}
-              />
-            </Row>
-            <Row style={{ marginTop: "10px" }}>
-              <NearestStationCard
                 latitude={location.coordinates.lat}
                 longitude={location.coordinates.lng}
               />
             </Row>
+            {/* <Row style={{ marginTop: "10px" }}>
+              <NearestStationCard
+                latitude={location.coordinates.lat}
+                longitude={location.coordinates.lng}
+              />
+            </Row> */}
             <Row style={{ marginTop: "10px" }}>
               <Fare />
             </Row>
           </Col>
-          <Col style={{ marginLeft: "-80px" }}>
+          <Col>
             <RouteCard />
           </Col>
         </Row>
