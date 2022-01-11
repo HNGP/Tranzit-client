@@ -51,17 +51,13 @@ export default function Home() {
       <SimpleGrid columns={2} spacing={4}>
         {/* <div style={{ padding: "200px 250px" }}> */}
         <Box style={{ padding: "200px 250px" }}>
-          <Image src={Logo} height="200px" width="200px" style={{}} />
-          <h1
-            style={{
-              fontSize: "100px",
-              fontWeight: "100",
-              margin: "-20px -10px",
-            }}
-          >
-            tranzit
-          </h1>
-          <div style={{ marginTop: "50px", marginLeft: "-20px" }}>
+          <div className={styles.logoLine}>
+            <Image src={Logo} height="130px" width="120px" />
+          </div>
+          <div className={styles.logoLine}>
+            <h1 className={styles.logoText}>tranzit</h1>
+          </div>
+          <div style={{ marginTop: "140px", marginLeft: "80px" }}>
             <StationsSelect runDijkstra={runDijkstra} />
           </div>
         </Box>
