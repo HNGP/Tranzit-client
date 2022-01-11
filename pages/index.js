@@ -11,7 +11,6 @@ import RouteContext from "../context/routeContext";
 import Logo from "../public/tranzit-2x.png";
 import styles from "../styles/Home.module.css";
 import useGeolocation from "../hooks/useGeoLocation";
-
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
     route(source: $source, destination: $destination) {

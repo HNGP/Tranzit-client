@@ -85,6 +85,7 @@ const StationsSelect = (props) => {
         }}
         bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
       0.1))"
+        zIndex={-10}
       >
         <form>
           <Flex direction="column">
