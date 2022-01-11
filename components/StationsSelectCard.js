@@ -37,8 +37,8 @@ const StationsSelect = (props) => {
   useEffect(() => {
     let sourceParam = router.query.src;
     let destinationParam = router.query.des;
-    setSource(sourceParam);
-    setDestination(destinationParam);
+    setSource(parseInt(sourceParam, 10));
+    setDestination(parseInt(destinationParam, 10));
   }, []);
 
   const changeSrc = (event) => {
@@ -53,8 +53,6 @@ const StationsSelect = (props) => {
     const temp = source;
     setSource(destination);
     setDestination(temp);
-    console.log(source);
-    console.log(destination);
   };
   const sendData = () => {
     setRouteData((prevState) => ({

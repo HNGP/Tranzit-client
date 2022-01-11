@@ -11,7 +11,9 @@ const NEAREST_STATION_QUERY = gql`
 `;
 
 const useFindNearestStation = (parameters) => {
-  return useQuery(NEAREST_STATION_QUERY, parameters);
+  if (parameters.variables.latitude && parameters.variables.longitude)
+    return useQuery(NEAREST_STATION_QUERY, parameters);
+  return { data: null };
 };
 
 export default useFindNearestStation;

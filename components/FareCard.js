@@ -24,13 +24,13 @@ const Fare = (props) => {
           Normal Fare
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" p="0" lineHeight="45px">
-          ₹{routeData.fare}
+          ₹{routeData.fare || 0}
         </Text>
         <Text m="3" mb="0" pt="2">
           Time
         </Text>
         <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
-          {parseInt(routeData.time, 10)}min
+          {parseInt(routeData.time, 10) || 0}min
         </Text>
       </Box>
     </Box>
