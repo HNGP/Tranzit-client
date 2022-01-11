@@ -1,41 +1,14 @@
-import Head from "next/head";
-import Image from "next/image";
-import React from "react";
+import { Container, SimpleGrid, VStack } from "@chakra-ui/react";
+import gql from "graphql-tag";
+import React, { useContext, useEffect } from "react";
+import { useLazyQuery } from "react-apollo";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
-import StationsSelect from "../components/StationsSelectCard";
-import { Stations } from "../components/routeSample";
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import useGeolocation from "../hooks/useGeoLocation";
-import gql from "graphql-tag";
-import { useLazyQuery } from "react-apollo";
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Slide,
-  Box,
-  VStack,
-  Badge,
-  Grid,
-  GridItem,
-  Container,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { Steps } from "antd";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { sortedLastIndex, truncate } from "lodash";
-import backgroundImage from "../public/background.png";
-import RouteCard from "../components/RouteCard";
 import NearestStationCard from "../components/NearestStationCard";
+import RouteCard from "../components/RouteCard";
+import StationsSelect from "../components/StationsSelectCard";
 import RouteContext from "../context/routeContext";
-import { useRouter } from "next/router";
+import useGeolocation from "../hooks/useGeoLocation";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -59,10 +32,6 @@ export default function RoutePage() {
   const onClose = () => {
     setModalOpen(false);
   };
-
-  const router = useRouter();
-  let source1 = router.query.src;
-  let destination1 = router.query.des;
 
   useEffect(() => {
     if (data) {
