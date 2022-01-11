@@ -1,23 +1,16 @@
-import React from "react";
-import { Steps, Button, Tag, Space } from "antd";
+import { Box } from "@chakra-ui/react";
+import { Steps, Tag } from "antd";
+import React, { useContext } from "react";
 import { MdCircle } from "react-icons/md";
 import { RiExchangeFill } from "react-icons/ri";
-import { Box, Text, Heading } from "@chakra-ui/react";
-import { STATION_LIST, LINE_TO_COLOR } from "../constants/staticData";
+import { LINE_TO_COLOR } from "../constants/staticData";
+import RouteContext from "../context/routeContext";
 import styles from "../styles/RouteCard.module.css";
-import { Stations } from "./routeSample";
 
 const { Step } = Steps;
 
-const RouteCard = ({ stationsList }) => {
-  //   const DisplayStations = () => {
-  //     stationsList.map((station) =>
-
-  //     {return }
-
-  // )
-  //   }
-
+const RouteCard = () => {
+  const { routeData } = useContext(RouteContext);
   return (
     <Box
       maxW="sm"
@@ -34,7 +27,7 @@ const RouteCard = ({ stationsList }) => {
     >
       <div className={styles.routeContainer}>
         <Steps direction="vertical" current={100}>
-          {stationsList.map((station, index) => {
+          {routeData.stationsList.map((station, index) => {
             if (station.lines.length > 1) {
               return (
                 <Step
@@ -43,19 +36,27 @@ const RouteCard = ({ stationsList }) => {
                     <>
                       INTERCHANGE FROM
                       <Tag
-                        color={LINE_TO_COLOR[stationsList[index - 1].lines[0]]}
+                        color={
+                          LINE_TO_COLOR[
+                            routeData.stationsList[index - 1].lines[0]
+                          ]
+                        }
                         style={{ marginLeft: "10px" }}
                       >
                         {" "}
-                        {stationsList[index - 1].lines[0]}{" "}
+                        {routeData.stationsList[index - 1].lines[0]}{" "}
                       </Tag>
                       TO
                       <Tag
-                        color={LINE_TO_COLOR[stationsList[index + 1].lines[0]]}
+                        color={
+                          LINE_TO_COLOR[
+                            routeData.stationsList[index + 1].lines[0]
+                          ]
+                        }
                         style={{ marginLeft: "10px" }}
                       >
                         {" "}
-                        {stationsList[index + 1].lines[0]}
+                        {routeData.stationsList[index + 1].lines[0]}
                       </Tag>
                     </>
                   }

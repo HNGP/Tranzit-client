@@ -1,27 +1,43 @@
-import React from "react";
-import { useState } from "react";
-import { Box, Select, Button, Flex } from "@chakra-ui/react";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import Dropdown from "./common/Dropdown";
-import { IconButton } from "@chakra-ui/react";
-import { RepeatIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Select, setScript } from "@chakra-ui/react";
+import Router from "next/router";
+import React, { useEffect, useState } from "react";
 import { MdSwapVert } from "react-icons/md";
+import useStationList from "../hooks/useStationList";
+import { useRouter } from "next/router";
 
 const StationsSelect = (props) => {
-  const STATION_LIST_QUERY = gql`
-    query StationsQuery {
-      stations {
-        id
-        title
-      }
-    }
-  `;
-
   const [source, setSource] = useState(null);
   const [destination, setDestination] = useState(null);
   const [stationList, setStationList] = useState([]);
+  const [isLoading, loadingActions] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const { data } = useStationList();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (data) {
+      const sortedStationList = data.stations.sort((st1, st2) =>
+        st1.title > st2.title ? 1 : -1
+      );
+      setStationList(
+        sortedStationList.map((station) => (
+          <option key={station.id} value={station.id}>
+            {station.title}
+          </option>
+        ))
+      );
+      setIsDisabled(!isDisabled);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    let sourceParam = router.query.src;
+    let destinationParam = router.query.des;
+    setSource(sourceParam);
+    setDestination(destinationParam);
+  }, []);
 
   const changeSrc = (event) => {
     setSource(parseInt(event.target.value, 10));
@@ -39,21 +55,17 @@ const StationsSelect = (props) => {
     console.log(destination);
   };
   const sendData = () => {
-    props.runDijkstra({ variables: { source, destination } });
+    loadingActions((loading) => !loading);
+    Router.push({
+      pathname: "/routePage",
+      query: { src: source, des: destination },
+    })
+      .then(props.runDijkstra({ variables: { source, destination } }))
+      .then(
+        props.sender !== "homepage" && loadingActions((loading) => !loading)
+      );
   };
-  const onCompleteHandler = (data) => {
-    const sortedStationList = data.stations.sort((st1, st2) =>
-      st1.title > st2.title ? 1 : -1
-    );
-    setStationList(
-      sortedStationList.map((station) => (
-        <option key={station.id} value={station.id}>
-          {station.title}
-        </option>
-      ))
-    );
-    setIsDisabled(!isDisabled);
-  };
+
   return (
     <Flex
       direction="row"
@@ -70,7 +82,6 @@ const StationsSelect = (props) => {
       bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
       0.1))"
     >
-      <Query query={STATION_LIST_QUERY} onCompleted={onCompleteHandler} />
       <form>
         <Flex direction="column">
           <Box m="3">
@@ -103,6 +114,7 @@ const StationsSelect = (props) => {
           </Box>
           <Box m="3">
             <Button
+              isLoading={isLoading}
               isDisabled={!source || !destination}
               bgColor="gray.500"
               color="white"

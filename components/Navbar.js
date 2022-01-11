@@ -1,22 +1,18 @@
-import { ReactNode } from "react";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
-  Text,
   HStack,
-  Link,
   IconButton,
-  Button,
+  Link,
   Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   MenuDivider,
-  useDisclosure,
-  useColorModeValue,
+  MenuItem,
+  MenuList,
   Stack,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import logoImg from "../public/tranzit-2x-shadow.png";
 
