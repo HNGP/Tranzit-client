@@ -1,9 +1,7 @@
-import { Container, SimpleGrid, VStack } from "@chakra-ui/react";
 import gql from "graphql-tag";
-import React, { useContext, useEffect, useState } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
 import { useLazyQuery } from "react-apollo";
-import { useRouter } from "next/router";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
 import NearestStationCard from "../components/NearestStationCard";
@@ -11,6 +9,7 @@ import RouteCard from "../components/RouteCard";
 import StationsSelect from "../components/StationsSelectCard";
 import RouteContext from "../context/routeContext";
 import useGeolocation from "../hooks/useGeoLocation";
+import { Row, Col } from "antd";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -67,22 +66,33 @@ export default function RoutePage() {
   return (
     <div>
       <Navbar />
-      <Container className="layout" maxW="container.xl" centerContent ml={0}>
-        <SimpleGrid columns={2} spacing={3} ml={50}>
-          <VStack width="100%" spacing={3} ml={150}>
-            <StationsSelect
-              findShortestPath={findShortestPath}
-              isLoading={routeData.loading}
-            />
-            <NearestStationCard
-              latitude={location.coordinates.lat}
-              longitude={location.coordinates.lng}
-            />
-            <Fare />
-          </VStack>
-          <RouteCard />
-        </SimpleGrid>
-      </Container>
+      <div
+        className="HeroLayout"
+        style={{ marginLeft: "auto", marginRight: "auto", maxWidth: "900px" }}
+      >
+        <Row>
+          <Col>
+            <Row>
+              <StationsSelect
+                findShortestPath={findShortestPath}
+                isLoading={routeData.loading}
+              />
+            </Row>
+            <Row style={{ marginTop: "10px" }}>
+              <NearestStationCard
+                latitude={location.coordinates.lat}
+                longitude={location.coordinates.lng}
+              />
+            </Row>
+            <Row style={{ marginTop: "10px" }}>
+              <Fare />
+            </Row>
+          </Col>
+          <Col style={{ marginLeft: "-80px" }}>
+            <RouteCard />
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
