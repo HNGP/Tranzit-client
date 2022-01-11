@@ -10,7 +10,7 @@ const Fare = (props) => {
       maxW="sm"
       borderWidth="1px"
       w="22.5%"
-      minW="250px"
+      minW="420px"
       borderRadius="15px"
       overflow="hidden"
       style={{

@@ -7,6 +7,7 @@ import { ChakraProvider, Box } from "@chakra-ui/react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import RouteContext from "../context/routeContext";
+import Head from "next/head";
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API,
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }) {
       <RouteContext.Provider value={{ routeData, setRouteData }}>
         <ChakraProvider>
           <div className="bgWrap">
+            <title>Tranzit</title>
             <Box
               w="2400px"
               h="3000px"
