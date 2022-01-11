@@ -1,9 +1,10 @@
 import { Box, Button, Flex, Select, setScript } from "@chakra-ui/react";
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
 import { MdSwapVert } from "react-icons/md";
 import useStationList from "../hooks/useStationList";
-import { useRouter } from "next/router";
+import RouteContext from "../context/routeContext";
 
 const StationsSelect = (props) => {
   const [source, setSource] = useState(null);
@@ -11,10 +12,11 @@ const StationsSelect = (props) => {
   const [stationList, setStationList] = useState([]);
   const [isLoading, loadingActions] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-
-  const { data } = useStationList();
+  const { setRouteData } = useContext(RouteContext);
 
   const router = useRouter();
+
+  const { data } = useStationList();
 
   useEffect(() => {
     if (data) {
@@ -55,15 +57,11 @@ const StationsSelect = (props) => {
     console.log(destination);
   };
   const sendData = () => {
-    loadingActions((loading) => !loading);
-    Router.push({
-      pathname: "/routePage",
-      query: { src: source, des: destination },
-    })
-      .then(props.runDijkstra({ variables: { source, destination } }))
-      .then(
-        props.sender !== "homepage" && loadingActions((loading) => !loading)
-      );
+    setRouteData((prevState) => ({
+      ...prevState,
+      loading: !prevState.loading,
+    }));
+    props.findShortestPath(source, destination);
   };
 
   return (
@@ -114,7 +112,7 @@ const StationsSelect = (props) => {
           </Box>
           <Box m="3">
             <Button
-              isLoading={isLoading}
+              isLoading={props.isLoading}
               isDisabled={!source || !destination}
               bgColor="gray.500"
               color="white"

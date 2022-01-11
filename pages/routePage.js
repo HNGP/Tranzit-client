@@ -1,7 +1,9 @@
 import { Container, SimpleGrid, VStack } from "@chakra-ui/react";
 import gql from "graphql-tag";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Router from "next/router";
 import { useLazyQuery } from "react-apollo";
+import { useRouter } from "next/router";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
 import NearestStationCard from "../components/NearestStationCard";
@@ -25,24 +27,42 @@ const ROUTE_QUERY = gql`
 
 export default function RoutePage() {
   const location = useGeolocation();
-  const { setRouteData } = useContext(RouteContext);
+  const { routeData, setRouteData } = useContext(RouteContext);
+  const [station, setStation] = useState({
+    source: null,
+    destination: null,
+  });
 
-  const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY);
+  const router = useRouter();
+
+  const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY, {
+    onCompleted: (data) => {
+      const { fare, stationsList, time } = data.route;
+      setRouteData((prevState) => ({
+        ...prevState,
+        fare,
+        stationsList,
+        time,
+        loading: !prevState.loading,
+      }));
+      Router.push({
+        pathname: "/routePage",
+        query: { src: station.source, des: station.destination },
+      });
+    },
+  });
 
   const onClose = () => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    if (data) {
-      const { fare, stationsList, time } = data.route;
-      setRouteData({
-        fare,
-        stationsList,
-        time,
-      });
-    }
-  }, [data]);
+  const findShortestPath = (source, destination) => {
+    runDijkstra({ variables: { source, destination } });
+    setStation({
+      source,
+      destination,
+    });
+  };
 
   return (
     <div>
@@ -50,7 +70,10 @@ export default function RoutePage() {
       <Container className="layout" maxW="container.xl" centerContent ml={0}>
         <SimpleGrid columns={2} spacing={3} ml={50}>
           <VStack width="100%" spacing={3} ml={150}>
-            <StationsSelect runDijkstra={runDijkstra} />
+            <StationsSelect
+              findShortestPath={findShortestPath}
+              isLoading={routeData.loading}
+            />
             <NearestStationCard
               latitude={location.coordinates.lat}
               longitude={location.coordinates.lng}

@@ -1,7 +1,9 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import Image from "next/image";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import Router from "next/router";
+import { useRouter } from "next/router";
 import { useLazyQuery } from "react-apollo";
 import SVGComponent from "../components/MetroLines";
 import StationsSelect from "../components/StationsSelectCard";
@@ -23,20 +25,38 @@ const ROUTE_QUERY = gql`
 `;
 
 export default function Home() {
-  const { setRouteData } = useContext(RouteContext);
+  const { routeData, setRouteData } = useContext(RouteContext);
+  const [station, setStation] = useState({
+    source: null,
+    destination: null,
+  });
 
-  const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY);
+  const router = useRouter();
 
-  useEffect(() => {
-    if (data) {
+  const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY, {
+    onCompleted: (data) => {
       const { fare, stationsList, time } = data.route;
-      setRouteData({
+      setRouteData((prevState) => ({
+        ...prevState,
         fare,
         stationsList,
         time,
+        loading: !prevState.loading,
+      }));
+      Router.push({
+        pathname: "/routePage",
+        query: { src: station.source, des: station.destination },
       });
-    }
-  }, [data]);
+    },
+  });
+
+  const findShortestPath = (source, destination) => {
+    runDijkstra({ variables: { source, destination } });
+    setStation({
+      source,
+      destination,
+    });
+  };
 
   return (
     <div>
@@ -50,7 +70,10 @@ export default function Home() {
             <h1 className={styles.logoText}>tranzit</h1>
           </div>
           <div style={{ marginTop: "140px", marginLeft: "80px" }}>
-            <StationsSelect runDijkstra={runDijkstra} sender={"homepage"} />
+            <StationsSelect
+              findShortestPath={findShortestPath}
+              isLoading={routeData.loading}
+            />
           </div>
         </Box>
         <Box style={{ padding: "240px 300px" }}>
