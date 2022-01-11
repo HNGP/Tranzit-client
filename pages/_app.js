@@ -17,7 +17,8 @@ function MyApp({ Component, pageProps }) {
     fare: null,
     stationsList: [],
     time: null,
-    loading: false, 
+    interchange: null,
+    loading: false,
   });
 
   return (

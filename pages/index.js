@@ -20,6 +20,7 @@ const ROUTE_QUERY = gql`
         lines
       }
       fare
+      interchange
     }
   }
 `;
@@ -35,12 +36,13 @@ export default function Home() {
 
   const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY, {
     onCompleted: (data) => {
-      const { fare, stationsList, time } = data.route;
+      const { fare, stationsList, time, interchange } = data.route;
       setRouteData((prevState) => ({
         ...prevState,
         fare,
         stationsList,
         time,
+        interchange,
         loading: !prevState.loading,
       }));
       Router.push({

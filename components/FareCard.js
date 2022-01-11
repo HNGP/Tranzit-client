@@ -29,8 +29,14 @@ const Fare = (props) => {
         <Text m="3" mb="0" pt="2">
           Time
         </Text>
-        <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
+        <Text ml="3" mb="0" fontSize="6xl" p="0" lineHeight="45px">
           {parseInt(routeData.time, 10) || 0}min
+        </Text>
+        <Text m="3" mb="0" pt="2">
+          Interchanges
+        </Text>
+        <Text ml="3" mb="0" fontSize="6xl" pb="5" lineHeight="45px">
+          {routeData.interchange || 0}
         </Text>
       </Box>
     </Box>
