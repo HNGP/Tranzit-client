@@ -39,4 +39,9 @@ export const LINE_TO_COLOR = {
   "Green Line": "#20B2AA",
   "Violet Line": "#553592",
   "Grey Line": "#838996",
+  "Pink Line Branch": "#FC8EAC",
+  "Blue Line Branch": "#006EE6",
+  "Green Line Branch": "#20B2AA",
+  "Orange Line to Pink Line (WALKOVER BRIDGE)": "#FF8C00",
+  "Pink Line to Orange Line (WALKOVER BRIDGE)": "#FC8EAC",
 };

@@ -107,11 +107,23 @@
   font-size: 1.25rem;
   line-height: 1.5;
 }
+.logoText {
+  font-size: 130px;
+  font-weight: 100;
+  margin: -50px -10px;
+  background: linear-gradient(to right, #4c4ab8, #dba171);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  position: relative;
+  letter-spacing: -6px;
+}
 
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.logoLine {
+  float: left;
+  width: 50%;
+  display: inline;
+  padding: 10px;
 }
 
 .station-container {

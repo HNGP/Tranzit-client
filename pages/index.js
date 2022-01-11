@@ -1,17 +1,13 @@
-import { useState, useEffect, useContext } from "react";
-import { Form, Select, InputNumber, Switch, Slider, Button } from "antd";
-import { MdCircle } from "react-icons/md";
-import Image from "next/image";
-import { SimpleGrid, Box } from "@chakra-ui/react";
-import Logo from "../public/tranzit-2x.png";
-import styles from "../styles/Home.module.css";
-import { SmileFilled } from "@ant-design/icons";
-import Link from "next/link";
-import StationsSelect from "../components/StationsSelectCard";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import gql from "graphql-tag";
+import Image from "next/image";
+import { useContext, useEffect } from "react";
 import { useLazyQuery } from "react-apollo";
 import SVGComponent from "../components/MetroLines";
+import StationsSelect from "../components/StationsSelectCard";
 import RouteContext from "../context/routeContext";
+import Logo from "../public/tranzit-2x.png";
+import styles from "../styles/Home.module.css";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -47,17 +43,13 @@ export default function Home() {
       <SimpleGrid columns={2} spacing={4}>
         {/* <div style={{ padding: "200px 250px" }}> */}
         <Box style={{ padding: "200px 250px" }}>
-          <Image src={Logo} height="150px" width="150px" />
-          <h1
-            style={{
-              fontSize: "100px",
-              fontWeight: "100",
-              margin: "-20px -10px",
-            }}
-          >
-            tranzit
-          </h1>
-          <div style={{ marginTop: "50px", marginLeft: "-20px" }}>
+          <div className={styles.logoLine}>
+            <Image src={Logo} height="130px" width="120px" />
+          </div>
+          <div className={styles.logoLine}>
+            <h1 className={styles.logoText}>tranzit</h1>
+          </div>
+          <div style={{ marginTop: "140px", marginLeft: "80px" }}>
             <StationsSelect runDijkstra={runDijkstra} sender={"homepage"} />
           </div>
         </Box>
