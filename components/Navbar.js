@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logoImg from "../public/tranzit-2x-shadow.png";
+import { Drawer } from "antd";
+import { MdPadding } from "react-icons/md";
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -88,32 +90,30 @@ export default function Simple() {
           </Menu>
         </Flex>
       </Flex>
-
-      {isOpen ? (
-        <Box pb={2} display={{ md: "none" }}>
-          <Stack
-            spacing={4}
-            bg="#E0E0E0"
-            ml={-300}
-            mt={3}
-            mr={1}
-            mb={80}
-            alignItems={"center"}
-            borderRadius={10}
-            padding={2}
-          >
-            <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+      <Drawer
+        visible={isOpen}
+        onClose={onClose}
+        placement="top"
+        title="tranzit"
+      >
+        <div style={{ fontSize: "18px", marginLeft: "180px" }}>
+          <h1 style={{ margin: "5px", padding: "5px" }}>
+            <Link h1x={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
               Home
             </Link>
+          </h1>
+          <h1 style={{ padding: "5px" }}>
             <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
               Map
             </Link>
+          </h1>
+          <h1 style={{ paddingTop: "7px" }}>
             <Link px={2} py={1} rounded={"md"} href={"/aboutPage"} zIndex={100}>
               About
             </Link>
-          </Stack>
-        </Box>
-      ) : null}
+          </h1>
+        </div>
+      </Drawer>
     </Box>
   );
 }
