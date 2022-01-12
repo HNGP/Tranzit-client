@@ -4,17 +4,19 @@ $bg-color: $gray; */
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   height: 60vh;
   width: 60vw;
-  margin-left: -400px;
+  /* margin-right: 200px; */
+  padding-right: 420px;
   /* background-color: $bg-color; */
 }
 
 .map {
   height: 90%;
   width: 90%;
+  position: absolute;
 }
 
 .line {

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 const SVGComponent = (props) => (
+  // <div id="root">
   <div id="root">
     <svg
       id="Metro_Map_Lines"
