@@ -26,10 +26,9 @@ export default function Simple() {
       style={{
         backdropFilter: "blur(2rem)",
         boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
-        opacity: "80%",
       }}
-      bgGradient="linear(to-br, rgba(255, 255, 255, 0.7),
-    				rgba(255, 255, 255, 0.3))"
+      // bgGradient="linear(to-br, rgba(255, 255, 255, 0.7),
+      // 			rgba(255, 255, 255, 0.3))"
       pl={80}
       height={70}
       mb={100}
@@ -58,6 +57,7 @@ export default function Simple() {
             fontWeight={300}
             bgGradient="linear(to-r, #4c4ab8, #dba171)"
             bgClip="text"
+            letterSpacing={-2.8}
           >
             tranzit
           </Text>

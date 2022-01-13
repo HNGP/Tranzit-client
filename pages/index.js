@@ -70,10 +70,10 @@ export default function Home() {
       <Col xs={24} sm={24} md={16} lg={14} xl={14}>
         <Box
           className={styles.show}
-          style={{ margin: "100px auto", maxWidth: "500px" }}
+          style={{ margin: "100px auto", maxWidth: "420px" }}
         >
           {/* <div className={styles.logoLine}> */}
-          <Row style={{ margin: "auto", maxWidth: "400px" }}>
+          <Row style={{ margin: "auto", maxWidth: "300px" }}>
             <Col span={5} className={styles.imgCol}>
               {/* <Col
               xs={5}
@@ -83,17 +83,18 @@ export default function Home() {
               xl={5}
               style={{ marginTop: "30px" }}
             > */}
-              <Image
-                src={Logo}
-                height={130}
-                width={120}
-                layout="intrinsic"
-                srcSet="1x"
-                style={{
-                  // filter: "box-shadow(4px 4px 4px rgba(0, 0, 0, 0.25))",
-                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                }}
-              />
+              <div>
+                <Image
+                  src={Logo}
+                  height={68}
+                  width={63}
+                  layout="fixed"
+                  srcSet="1x"
+                  style={{
+                    boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                  }}
+                />
+              </div>
             </Col>
             {/* <div className={styles.logoLine}> */}
             <Col span={19}>
