@@ -47,7 +47,7 @@ export default function Simple() {
           <Image
             style={{ border: "2px" }}
             height="50px"
-            width="50px"
+            width="56px"
             src={logoImg}
             alt="Logo"
           />

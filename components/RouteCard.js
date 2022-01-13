@@ -17,7 +17,7 @@ const RouteCard = () => {
       className={styles.routeCard}
       // maxW='sm'
       //   w="22.5%"
-      w={[380, 420, 420]}
+      w={[380, 420, 500]}
     >
       <div className={styles.routeContainer}>
         <Steps direction="vertical" current={100}>
