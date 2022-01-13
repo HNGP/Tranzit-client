@@ -15,32 +15,14 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logoImg from "../public/tranzit-2x-shadow.png";
-
-const Links = ["Home", "Map", "About"];
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    // _hover={{
-    //   textDecoration: "none",
-    //   bg: useColorModeValue("blue.200", "gray.700"),
-    // }}
-
-    href={"/"}
-    zIndex={100}
-  >
-    {children}
-  </Link>
-);
+import { Drawer } from "antd";
+import { MdPadding } from "react-icons/md";
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
-      // bg={useColorModeValue("gray.100", "gray.300")}
       style={{
         backdropFilter: "blur(2rem)",
         boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
@@ -50,7 +32,6 @@ export default function Simple() {
     				rgba(255, 255, 255, 0.3))"
       pl={80}
       height={70}
-      zIndex={100}
       mb={100}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
@@ -60,8 +41,8 @@ export default function Simple() {
           aria-label={"Open Menu"}
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
-          zIndex={100}
-          mt={20}
+          mt={1}
+          ml={-300}
         />
         <Box display="flex" style={{ cursor: "pointer" }}>
           <Image
@@ -71,7 +52,13 @@ export default function Simple() {
             src={logoImg}
             alt="Logo"
           />
-          <Text fontSize={35} px={2} fontWeight={300}>
+          <Text
+            fontSize={35}
+            px={2}
+            fontWeight={300}
+            bgGradient="linear(to-r, #4c4ab8, #dba171)"
+            bgClip="text"
+          >
             tranzit
           </Text>
         </Box>
@@ -82,9 +69,15 @@ export default function Simple() {
           zIndex={100}
           display={{ base: "none", md: "flex" }}
         >
-          {Links.map((link) => (
-            <NavLink key={link}>{link}</NavLink>
-          ))}
+          <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+            Home
+          </Link>
+          <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+            Map
+          </Link>
+          <Link px={2} py={1} rounded={"md"} href={"/aboutPage"} zIndex={100}>
+            About
+          </Link>
         </HStack>
         <Flex alignItems={"center"}>
           <Menu>
@@ -92,23 +85,35 @@ export default function Simple() {
               <MenuItem>Home</MenuItem>
               <MenuItem>Map</MenuItem>
               <MenuDivider />
-              <MenuItem>
-                <Link href="/aboutPage">About</Link>
-              </MenuItem>
+              <MenuItem>About</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
       </Flex>
-
-      {isOpen ? (
-        <Box pb={2} display={{ md: "none" }}>
-          <Stack as={"nav"} spacing={4}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
-            ))}
-          </Stack>
-        </Box>
-      ) : null}
+      <Drawer
+        visible={isOpen}
+        onClose={onClose}
+        placement="top"
+        title="tranzit"
+      >
+        <div style={{ fontSize: "18px", marginLeft: "180px" }}>
+          <h1 style={{ margin: "5px", padding: "5px" }}>
+            <Link h1x={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+              Home
+            </Link>
+          </h1>
+          <h1 style={{ padding: "5px" }}>
+            <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+              Map
+            </Link>
+          </h1>
+          <h1 style={{ paddingTop: "7px" }}>
+            <Link px={2} py={1} rounded={"md"} href={"/aboutPage"} zIndex={100}>
+              About
+            </Link>
+          </h1>
+        </div>
+      </Drawer>
     </Box>
   );
 }
