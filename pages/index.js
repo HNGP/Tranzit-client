@@ -120,6 +120,8 @@ export default function Home() {
                 isLoading={routeData.loading}
                 latitude={location.coordinates.lat}
                 longitude={location.coordinates.lng}
+                // latitude={25.616763}
+                // longitude={77.109558}
               />
             </div>
           </Row>

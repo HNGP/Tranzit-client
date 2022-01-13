@@ -43,7 +43,7 @@ export default function Simple() {
           mt={1}
           ml={-300}
         />
-        <Box display="flex" style={{ cursor: "pointer" }}>
+        <Box display="flex" style={{ cursor: "pointer" }} ml={-10} mt={2}>
           <Image
             style={{ border: "2px" }}
             height="50px"
@@ -51,16 +51,18 @@ export default function Simple() {
             src={logoImg}
             alt="Logo"
           />
-          <Text
-            fontSize={35}
-            px={2}
-            fontWeight={300}
-            bgGradient="linear(to-r, #4c4ab8, #dba171)"
-            letterSpacing={-2.5}
-            bgClip="text"
-          >
-            tranzit
-          </Text>
+          <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+            <Text
+              fontSize={35}
+              px={2}
+              fontWeight={300}
+              bgGradient="linear(to-r, #4c4ab8, #dba171)"
+              letterSpacing={-2.5}
+              bgClip="text"
+            >
+              tranzit
+            </Text>
+          </Link>
         </Box>
         <HStack
           as={"nav"}
