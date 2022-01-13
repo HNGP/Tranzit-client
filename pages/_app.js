@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
               w="2400px"
               h="3000px"
               // bgGradient={"linear(to-bl, red.400, yellow.200)"}
-              bgGradient={["radial(#D4D8DB, white)"]}
+              // bgGradient={["radial(#D4D8DB, white)"]}
               /* Rectangle 1 */
             />
           </div>
