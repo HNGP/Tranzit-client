@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import gql from "graphql-tag";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
@@ -11,6 +11,8 @@ import RouteContext from "../context/routeContext";
 import Logo from "../public/tranzit-2x.png";
 import styles from "../styles/Home.module.css";
 import useGeolocation from "../hooks/useGeoLocation";
+import { Row, Col } from "antd";
+
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
     route(source: $source, destination: $destination) {
@@ -20,6 +22,7 @@ const ROUTE_QUERY = gql`
         lines
       }
       fare
+      interchange
     }
   }
 `;
@@ -36,12 +39,13 @@ export default function Home() {
 
   const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY, {
     onCompleted: (data) => {
-      const { fare, stationsList, time } = data.route;
+      const { fare, stationsList, time, interchange } = data.route;
       setRouteData((prevState) => ({
         ...prevState,
         fare,
         stationsList,
         time,
+        interchange,
         loading: !prevState.loading,
       }));
       Router.push({
@@ -60,29 +64,75 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <SimpleGrid columns={2} spacing={4}>
-        {/* <div style={{ padding: "200px 250px" }}> */}
-        <Box style={{ padding: "200px 250px" }}>
-          <div className={styles.logoLine}>
-            <Image src={Logo} height="130px" width="120px" />
-          </div>
-          <div className={styles.logoLine}>
-            <h1 className={styles.logoText}>tranzit</h1>
-          </div>
-          <div style={{ marginTop: "180px", marginLeft: "10px" }}>
-            <StationsSelect
-              findShortestPath={findShortestPath}
-              isLoading={routeData.loading}
-              latitude={location.coordinates.lat}
-              longitude={location.coordinates.lng}
-            />
-          </div>
+    // <div className={styles.land}>
+    <Row>
+      {/* <Col span={14}> */}
+      <Col xs={24} sm={24} md={16} lg={14} xl={14}>
+        <Box
+          className={styles.show}
+          style={{ margin: "100px auto", maxWidth: "500px" }}
+        >
+          {/* <div className={styles.logoLine}> */}
+          <Row style={{ margin: "auto", maxWidth: "400px" }}>
+            <Col span={5} className={styles.imgCol}>
+              {/* <Col
+              xs={5}
+              sm={5}
+              md={5}
+              lg={5}
+              xl={5}
+              style={{ marginTop: "30px" }}
+            > */}
+              <Image
+                src={Logo}
+                height={130}
+                width={120}
+                layout="intrinsic"
+                srcSet="1x"
+                style={{
+                  // filter: "box-shadow(4px 4px 4px rgba(0, 0, 0, 0.25))",
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+              />
+            </Col>
+            {/* <div className={styles.logoLine}> */}
+            <Col span={19}>
+              {/* <Col xs={19} sm={19} md={19} lg={19} xl={19}> */}
+              <Text
+                // fontSize={100}
+                fontSize={{ base: "85px", md: "100px", lg: "100px" }}
+                px={2}
+                fontWeight={300}
+                bgGradient="linear(to-r, #4c4ab8, #dba171)"
+                bgClip="text"
+                letterSpacing="-7px"
+              >
+                tranzit
+              </Text>
+              {/* <h1 className={styles.logoText}>tranzit</h1> */}
+            </Col>
+          </Row>
+          <Row>
+            <div style={{ margin: "auto" }}>
+              <StationsSelect
+                findShortestPath={findShortestPath}
+                isLoading={routeData.loading}
+                latitude={location.coordinates.lat}
+                longitude={location.coordinates.lng}
+              />
+            </div>
+          </Row>
         </Box>
-        <Box style={{ padding: "240px 300px" }}>
+      </Col>
+      <Col xs={0} sm={0} md={8} lg={10} xl={10}>
+        <Box
+          className={styles.hide}
+          style={{ margin: "100px auto", maxWidth: "500px", position: "fixed" }}
+        >
           <SVGComponent />
         </Box>
-      </SimpleGrid>
-    </div>
+      </Col>
+    </Row>
+    // </div>
   );
 }
