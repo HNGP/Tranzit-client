@@ -22,7 +22,7 @@ const Fare = (props) => {
     >
       <Box m="3">
         <Row>
-          <Col span={12}>
+          <Col span={16}>
             <Text m="3" mb="0">
               Normal Fare
             </Text>
@@ -38,7 +38,7 @@ const Fare = (props) => {
               {parseInt(routeData.time, 10) || 0}min
             </Text>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
             <Text m="1" mb="0" pt="2">
               Interchanges
             </Text>

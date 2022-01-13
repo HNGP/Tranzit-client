@@ -1,37 +1,36 @@
 .routeContainer {
-    margin: 2rem 2rem;
+  margin: 2rem 2rem;
 }
 
-.routeContainer>h1 {
-    margin-bottom: 1rem;
+.routeContainer > h1 {
+  margin-bottom: 1rem;
 }
 
 .stationContainer {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
 }
 
-.stationContainer>p {
-    margin: 0;
+.stationContainer > p {
+  margin: 0;
 }
 
 .routeCard {
-    background-image: linear-gradient( to bottom right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
-    margin-bottom: 20;
-    border-radius: 15px;
-    overflow: "hidden";
-    border-width: 1px;
-    backdrop-filter: blur(10rem);
-    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+  /* background-image: linear-gradient( to bottom right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)); */
+  margin-bottom: 20;
+  border-radius: 15px;
+  overflow: "hidden";
+  border-width: 1px;
+  backdrop-filter: blur(10rem);
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
 }
 
 @media only screen and (max-width: 600px) {
-    .routeCard {
-        margin-top: 10px;
-    }
+  .routeCard {
+    margin-top: 10px;
+  }
 }
-
 
 /* .icon {
   margin-right: 2rem;
