@@ -23,7 +23,7 @@ export default function AboutPage() {
           fontSize="17"
           borderRadius="4px"
           fontFamily="sans-serif"
-          bgGradient="radial-gradient(99.97% 16823.96% at 0.03% 6.31%, rgba(255, 255, 255, 0.42) 2.62%, rgba(255, 255, 255, 0.06) 100%);"
+          // bgGradient="radial-gradient(99.97% 16823.96% at 0.03% 6.31%, rgba(255, 255, 255, 0.42) 2.62%, rgba(255, 255, 255, 0.06) 100%);"
           mt="75px"
           mb="40px"
         >

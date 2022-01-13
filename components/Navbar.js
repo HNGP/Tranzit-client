@@ -21,6 +21,7 @@ import { MdPadding } from "react-icons/md";
 export default function Simple() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+
 	return (
 		<Box
 			style={{
@@ -28,8 +29,8 @@ export default function Simple() {
 				boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
 				opacity: "80%",
 			}}
-			bgGradient='linear(to-br, rgba(255, 255, 255, 0.7),
-    				rgba(255, 255, 255, 0.3))'
+			//bgGradient='linear(to-br, rgba(255, 255, 255, 0.7),
+    			//	rgba(255, 255, 255, 0.3))'
 			pl={80}
 			height={70}>
 			<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
@@ -111,4 +112,5 @@ export default function Simple() {
 			</Drawer>
 		</Box>
 	);
+
 }

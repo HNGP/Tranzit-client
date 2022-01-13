@@ -11,6 +11,7 @@ import styles from "../styles/RouteCard.module.css";
 const { Step } = Steps;
 
 const RouteCard = () => {
+
 	const { routeData } = useContext(RouteContext);
 	return (
 		<Box
@@ -82,6 +83,7 @@ const RouteCard = () => {
 			</div>
 		</Box>
 	);
+
 };
 
 export default RouteCard;
