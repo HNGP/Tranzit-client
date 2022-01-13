@@ -67,15 +67,7 @@ export default function RoutePage() {
 	return (
 		<div>
 			<Navbar />
-			<div
-				className={styles.HeroLayout}
-				// style={{
-				// 	marginTop: "20px",
-				// 	marginLeft: "auto",
-				// 	marginRight: "auto",
-				// 	maxWidth: "1000px",
-				// }}
-			>
+			<div className={styles.HeroLayout}>
 				<Row>
 					<Col style={{ marginRight: "20px" }}>
 						<Row>
