@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import Router, { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useLazyQuery } from "react-apollo";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
@@ -11,6 +11,7 @@ import RouteContext from "../context/routeContext";
 import useGeolocation from "../hooks/useGeoLocation";
 import { Row, Col } from "antd";
 import styles from "../styles/routePage.module.css";
+import mixpanel from "mixpanel-browser";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -63,6 +64,13 @@ export default function RoutePage() {
       destination,
     });
   };
+  useEffect(() => {
+    mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
+      debug: true,
+      ignore_dnt: true,
+    });
+    mixpanel.track("Route Page Loaded");
+  }, []);
 
   return (
     <div>

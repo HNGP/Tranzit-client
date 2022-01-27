@@ -12,6 +12,7 @@ import Logo from "../public/tranzit-2x.png";
 import styles from "../styles/Home.module.css";
 import useGeolocation from "../hooks/useGeoLocation";
 import { Row, Col } from "antd";
+import mixpanel from "mixpanel-browser";
 
 const ROUTE_QUERY = gql`
   query routeQuery($source: Int, $destination: Int) {
@@ -62,6 +63,17 @@ export default function Home() {
       destination,
     });
   };
+
+  useEffect(() => {
+    mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
+      debug: true,
+      ignore_dnt: true,
+    });
+    mixpanel.track("Landing Page Loaded");
+    mixpanel.track("NearestStation", {
+      NearestStation: localStorage.getItem("NearestStn"),
+    });
+  }, []);
 
   return (
     // <div className={styles.land}>
