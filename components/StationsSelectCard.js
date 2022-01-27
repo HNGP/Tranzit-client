@@ -97,7 +97,7 @@ const StationsSelect = (props) => {
                 placeholder="From"
                 name="src"
                 height="34px"
-                width="120%"
+                width="360px"
                 bg="white"
                 borderRadius="10px"
                 isDisabled={isDisabled}
@@ -114,7 +114,7 @@ const StationsSelect = (props) => {
                 name="dest"
                 height="34px"
                 bg="white"
-                width="120%"
+                width="360px"
                 borderRadius="10px"
                 isDisabled={isDisabled}
                 onChange={changeDest}
@@ -129,7 +129,7 @@ const StationsSelect = (props) => {
                 isDisabled={!source || !destination}
                 bgColor="gray.500"
                 color="white"
-                width="120%"
+                width="390px"
                 fontSize="20px"
                 fontWeight="400"
                 size="md"
@@ -140,8 +140,13 @@ const StationsSelect = (props) => {
             </Box>
           </Flex>
         </form>
-        <Flex justify="end" marginTop="25%" marginLeft="12%">
-          <MdSwapVert color="#000000" onClick={swap} fontSize="25px" />
+        <Flex justify="end" marginTop="25%" marginLeft="-32px">
+          <MdSwapVert
+            style={{ cursor: "pointer" }}
+            color="#000000"
+            onClick={swap}
+            fontSize="25px"
+          />
         </Flex>
       </Flex>
     </>

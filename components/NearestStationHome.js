@@ -54,13 +54,6 @@ const NearestStationHome = (props) => {
           >
             NEAREST STATION
           </p>
-          {/* {latitude && longitude && data ? (
-            <p style={{ fontSize: "18px", lineHeight: "1.2" }}>
-              {data.nearestStation.nearestStation}
-            </p>
-          ) : (
-            <p>Loading....</p>
-          )} */}
           <LocationText />
         </Col>
       </Row>
