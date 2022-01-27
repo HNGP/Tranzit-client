@@ -24,6 +24,7 @@
     "esm": "^3.2.25",
     "framer-motion": "^4.1.17",
     "graphql": "^16.0.1",
+    "mixpanel-browser": "^2.43.0",
     "next": "latest",
     "next-plugin-antd-less": "^1.7.0",
     "postcss-preset-env": "^6.7.0",

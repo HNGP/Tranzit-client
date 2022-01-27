@@ -23,6 +23,10 @@ const useGeoLocation = () => {
         code: error.code,
         message: error.message,
       },
+      coordinates: {
+        lat: 0.0,
+        lng: 0.0,
+      },
     });
   };
 
