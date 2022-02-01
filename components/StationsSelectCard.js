@@ -106,11 +106,13 @@ const StationsSelect = (props) => {
             <Box m="3">
               <AutoComplete
                 value={source.label}
-                style={{ width: 360 }}
+                style={{ width: 360, height: 34 }}
                 dropdownMatchSelectWidth
+                className="dropdown"
                 options={stationList}
                 onSelect={changeSrc}
                 onSearch={changeSrc}
+                disabled={isDisabled}
                 placeholder="From"
                 filterOption={(inputValue, option) =>
                   option.label
@@ -118,28 +120,17 @@ const StationsSelect = (props) => {
                     .indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
-              {/* <Select
-                variant="filled"
-                placeholder="From"
-                name="src"
-                height="34px"
-                width="360px"
-                bg="white"
-                borderRadius="10px"
-                isDisabled={isDisabled}
-                onChange={changeSrc}
-                value={source}
-              >
-                {stationList}
-              </Select> */}
             </Box>
             <Box m="3">
               <AutoComplete
                 value={destination.label}
-                style={{ width: 360 }}
+                style={{ width: 360, height: 34 }}
+                dropdownMatchSelectWidth
+                className="dropdown"
                 options={stationList}
                 onSelect={changeDest}
                 onSearch={changeDest}
+                disabled={isDisabled}
                 placeholder="To"
                 filterOption={(inputValue, option) =>
                   option.label
@@ -147,20 +138,6 @@ const StationsSelect = (props) => {
                     .indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
-              {/* <Select
-                variant="filled"
-                placeholder="To"
-                name="dest"
-                height="34px"
-                bg="white"
-                width="360px"
-                borderRadius="10px"
-                isDisabled={isDisabled}
-                onChange={changeDest}
-                value={destination}
-              >
-                {stationList}
-              </Select> */}
             </Box>
             <Box m="3">
               <Button

@@ -81,7 +81,7 @@ export default function Simple() {
             px={2}
             py={1}
             rounded={"md"}
-            href={"https://www.prntr.com/images/delhi-metro-map.jpg"}
+            href="http://www.delhimetrorail.com/images/Network-Map-English-1.jpg"
             zIndex={100}
             isExternal
           >
