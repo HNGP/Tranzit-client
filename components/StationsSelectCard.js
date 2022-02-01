@@ -1,13 +1,10 @@
-import { Box, Button, Flex, Select, setScript, Text } from "@chakra-ui/react";
-import Router from "next/router";
-import React, { useEffect, useState, useContext } from "react";
-import Image from "next/image";
+import React, { useContext, useEffect, useState } from "react";
+import { Box, Button, Flex, Select } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { MdSwapVert } from "react-icons/md";
-import useStationList from "../hooks/useStationList";
-import RouteContext from "../context/routeContext";
-import LocationIcon from "../public/location-pin.png";
 import NearestStationHome from "../components/NearestStationHome";
+import RouteContext from "../context/routeContext";
+import useStationList from "../hooks/useStationList";
 
 const StationsSelect = (props) => {
   const [source, setSource] = useState(null);
