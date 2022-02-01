@@ -1,10 +1,9 @@
 import gql from "graphql-tag";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useContext, useState, useEffect } from "react";
 import { useLazyQuery } from "react-apollo";
 import Fare from "../components/FareCard";
 import Navbar from "../components/Navbar";
-import NearestStationCard from "../components/NearestStationCard";
 import RouteCard from "../components/RouteCard";
 import StationsSelect from "../components/StationsSelectCard";
 import RouteContext from "../context/routeContext";
@@ -34,6 +33,8 @@ export default function RoutePage() {
     source: null,
     destination: null,
   });
+
+  const Router = useRouter();
 
   const [runDijkstra, { loading, error, data }] = useLazyQuery(ROUTE_QUERY, {
     onCompleted: (data) => {
@@ -84,16 +85,8 @@ export default function RoutePage() {
                 isLoading={routeData.loading}
                 latitude={location.coordinates.lat}
                 longitude={location.coordinates.lng}
-                // latitude={25.616763}
-                // longitude={77.109558}
               />
             </Row>
-            {/* <Row style={{ marginTop: "10px" }}>
-              <NearestStationCard
-                latitude={location.coordinates.lat}
-                longitude={location.coordinates.lng}
-              />
-            </Row> */}
             <Row style={{ marginTop: "10px" }}>
               <Fare />
             </Row>
