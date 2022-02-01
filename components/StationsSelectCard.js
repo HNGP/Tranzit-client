@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Flex, Select } from "@chakra-ui/react";
+import { AutoComplete, message } from "antd";
 import { useRouter } from "next/router";
 import { MdSwapVert } from "react-icons/md";
 import NearestStationHome from "../components/NearestStationHome";
@@ -7,8 +8,8 @@ import RouteContext from "../context/routeContext";
 import useStationList from "../hooks/useStationList";
 
 const StationsSelect = (props) => {
-  const [source, setSource] = useState(null);
-  const [destination, setDestination] = useState(null);
+  const [source, setSource] = useState({});
+  const [destination, setDestination] = useState({});
   const [stationList, setStationList] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setRouteData } = useContext(RouteContext);
@@ -21,35 +22,45 @@ const StationsSelect = (props) => {
   const router = useRouter();
 
   useEffect(() => {
+    let sourceParam = router.query.src;
+    let destinationParam = router.query.des;
     if (data) {
       const sortedStationList = data.stations.sort((st1, st2) =>
         st1.title > st2.title ? 1 : -1
       );
       setStationList(
-        sortedStationList.map((station) => (
-          <option key={station.id} value={station.id}>
-            {station.title}
-          </option>
-        ))
+        sortedStationList.map((station) => {
+          if (sourceParam == station.id) {
+            setSource({
+              label: station.title,
+              value: station.id,
+            });
+          }
+          if (destinationParam == station.id) {
+            setDestination({
+              label: station.title,
+              value: station.id,
+            });
+          }
+          return {
+            label: station.title,
+            value: station.id,
+          };
+        })
       );
       setIsDisabled(!isDisabled);
     }
   }, [data]);
 
-  useEffect(() => {
-    let sourceParam = router.query.src;
-    let destinationParam = router.query.des;
-    setSource(parseInt(sourceParam, 10));
-    setDestination(parseInt(destinationParam, 10));
-  }, []);
-
-  const changeSrc = (event) => {
-    setSource(parseInt(event.target.value, 10));
-    event.preventDefault();
+  const changeSrc = (data) => {
+    if (!isNaN(data) && data !== "")
+      setSource(stationList.find(({ value }) => value === data));
+    else setSource({ label: data, value: "" });
   };
-  const changeDest = (event) => {
-    setDestination(parseInt(event.target.value, 10));
-    event.preventDefault();
+  const changeDest = (data) => {
+    if (!isNaN(data) && data !== "")
+      setDestination(stationList.find(({ value }) => value === data));
+    else setDestination({ label: data, value: "" });
   };
   const swap = () => {
     const temp = source;
@@ -57,11 +68,18 @@ const StationsSelect = (props) => {
     setDestination(temp);
   };
   const sendData = () => {
+    if (!source.value || !destination.value) {
+      message.error("Please select correct source and destination stations");
+      return;
+    }
     setRouteData((prevState) => ({
       ...prevState,
       loading: !prevState.loading,
     }));
-    props.findShortestPath(source, destination);
+    props.findShortestPath(
+      parseInt(source.value, 10),
+      parseInt(destination.value, 10)
+    );
   };
 
   return (
@@ -80,15 +98,27 @@ const StationsSelect = (props) => {
           backdropFilter: "blur(10rem)",
           boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
         }}
-        // bgGradient="linear(to-br, rgba(255, 255, 255, 0.4), rgba(255, 255, 255,
-        //   0.1))"
         zIndex={1}
       >
         <form>
           <Flex direction="column">
             <NearestStationHome latitude={latitude} longitude={longitude} />
             <Box m="3">
-              <Select
+              <AutoComplete
+                value={source.label}
+                style={{ width: 360 }}
+                dropdownMatchSelectWidth
+                options={stationList}
+                onSelect={changeSrc}
+                onSearch={changeSrc}
+                placeholder="From"
+                filterOption={(inputValue, option) =>
+                  option.label
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              {/* <Select
                 variant="filled"
                 placeholder="From"
                 name="src"
@@ -101,10 +131,23 @@ const StationsSelect = (props) => {
                 value={source}
               >
                 {stationList}
-              </Select>
+              </Select> */}
             </Box>
             <Box m="3">
-              <Select
+              <AutoComplete
+                value={destination.label}
+                style={{ width: 360 }}
+                options={stationList}
+                onSelect={changeDest}
+                onSearch={changeDest}
+                placeholder="To"
+                filterOption={(inputValue, option) =>
+                  option.label
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              {/* <Select
                 variant="filled"
                 placeholder="To"
                 name="dest"
@@ -117,12 +160,12 @@ const StationsSelect = (props) => {
                 value={destination}
               >
                 {stationList}
-              </Select>
+              </Select> */}
             </Box>
             <Box m="3">
               <Button
                 isLoading={props.isLoading}
-                isDisabled={!source || !destination}
+                isDisabled={!source.label || !destination.label}
                 bgColor="gray.500"
                 color="white"
                 width="390px"
