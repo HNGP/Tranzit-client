@@ -9,14 +9,12 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Drawer } from "antd";
 import Image from "next/image";
 import logoImg from "../public/tranzit-2x-shadow.png";
-import { Drawer } from "antd";
-import { MdPadding } from "react-icons/md";
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,8 +26,6 @@ export default function Simple() {
         boxShadow: "6px 6px 20px rgba(122, 122, 122, 0.212)",
         opacity: "80%",
       }}
-      //bgGradient='linear(to-br, rgba(255, 255, 255, 0.7),
-      //	rgba(255, 255, 255, 0.3))'
       pl={80}
       height={70}
     >
@@ -51,7 +47,14 @@ export default function Simple() {
             src={logoImg}
             alt="Logo"
           />
-          <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+          <Link
+            px={2}
+            py={1}
+            rounded={"md"}
+            href={"/"}
+            zIndex={100}
+            style={{ textDecoration: "none" }}
+          >
             <Text
               fontSize={35}
               px={2}
@@ -74,7 +77,14 @@ export default function Simple() {
           <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
             Home
           </Link>
-          <Link px={2} py={1} rounded={"md"} href={"/"} zIndex={100}>
+          <Link
+            px={2}
+            py={1}
+            rounded={"md"}
+            href={"https://www.prntr.com/images/delhi-metro-map.jpg"}
+            zIndex={100}
+            isExternal
+          >
             Map
           </Link>
           <Link px={2} py={1} rounded={"md"} href={"/aboutPage"} zIndex={100}>

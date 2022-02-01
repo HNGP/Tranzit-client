@@ -10,7 +10,6 @@ const StationsSelect = (props) => {
   const [source, setSource] = useState(null);
   const [destination, setDestination] = useState(null);
   const [stationList, setStationList] = useState([]);
-  const [isLoading, loadingActions] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setRouteData } = useContext(RouteContext);
   let { latitude, longitude } = props;
