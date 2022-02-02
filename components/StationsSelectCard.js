@@ -105,10 +105,9 @@ const StationsSelect = (props) => {
             <NearestStationHome latitude={latitude} longitude={longitude} />
             <Box m="3">
               <AutoComplete
+                className="autocomplete"
+                dropdownClassName="dropdown"
                 value={source.label}
-                style={{ width: 360, height: 34 }}
-                dropdownMatchSelectWidth
-                className="dropdown"
                 options={stationList}
                 onSelect={changeSrc}
                 onSearch={changeSrc}
@@ -125,8 +124,7 @@ const StationsSelect = (props) => {
               <AutoComplete
                 value={destination.label}
                 style={{ width: 360, height: 34 }}
-                dropdownMatchSelectWidth
-                className="dropdown"
+                dropdownClassName="dropdown"
                 options={stationList}
                 onSelect={changeDest}
                 onSearch={changeDest}

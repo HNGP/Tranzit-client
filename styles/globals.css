@@ -17,12 +17,26 @@ a {
   box-sizing: border-box;
 }
 
+.dropdown {
+  width: 100%;
+}
+
 .bgWrap {
   position: fixed;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   z-index: -10;
+}
+
+.autocomplete {
+  width: 360px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.ant-select-dropdown {
+  background: pink;
 }
 
 .ant-select-show-search.ant-select-single:not(.ant-select-customize-input)
@@ -35,4 +49,14 @@ a {
   .ant-row {
     transform: scale(0.9);
   }
+
+  .dropdown {
+    transform: scale(0.9);
+    width: 292px;
+    overflow-x: scroll;
+  }
+
+  /* .autocomplete {
+    width: 292px;
+  } */
 }
